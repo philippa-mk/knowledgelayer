@@ -1,0 +1,38 @@
+Package: knowledgelayer
+Type: Package
+Title: A Knowledge Layer and Decision Record for Oversight Analytics
+Version: 0.2.0
+Authors@R: person("Philippa", "Hawker", email = "hello@philippa.page",
+    role = c("aut", "cre"))
+Description: Plain-file tools that sit beside a reproducible analytical
+    pipeline and keep what the code alone cannot: which projects exist, who
+    holds them, what data and methods they share, and how each review
+    decision was made. A shared, 'SKOS'-shaped oversight vocabulary (audit
+    concepts, report types, criteria, a findings typology with crosswalks to
+    the standards, program areas) connects work described in different
+    words, and an office extends it with its own terms. Four further parts:
+    a project registry with links between projects and a single-point-of-
+    knowledge check; a capability checklist adapted from the UK Local
+    Government Association's LG Inform Plus, for measuring a jurisdiction's
+    public data infrastructure; a human review page whose exported verdicts
+    gate the next pipeline step, with a check for rubber-stamped reviews;
+    and an append-only, hash-chained decision log that gives an audit trail
+    even where no version control system is in place.
+License: MIT + file LICENSE
+URL: https://github.com/philippa-mk/knowledgelayer, https://philippa.page
+BugReports: https://github.com/philippa-mk/knowledgelayer/issues
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+    jsonlite,
+    tools,
+    utils
+Suggests:
+    openssl,
+    targets,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1

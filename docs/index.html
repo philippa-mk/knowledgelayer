@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>knowledgelayer runbook</title>
+<style>
+:root {
+  --bg: #f7f7f5; --surface: #ffffff; --ink: #1b1d21; --muted: #4a4f57;
+  --line: #c9ccd1; --accent: #1f4e79; --accent-ink: #ffffff; --code-bg: #eef0f3; --focus: #1f4e79;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a; --surface: #1e2125; --ink: #eceef1; --muted: #b4b9c1;
+    --line: #444a52; --accent: #8ab8e6; --accent-ink: #0d1520; --code-bg: #2a2e33; --focus: #8ab8e6;
+  }
+}
+@media (prefers-contrast: more) { :root { --line: var(--ink); --muted: var(--ink); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--accent-ink);
+  padding: .6rem 1rem; z-index: 10; }
+.skip:focus { left: 1rem; top: 1rem; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+header, nav, main, footer { max-width: 48rem; margin: 0 auto; padding: 0 16px; }
+header { padding-top: 2.5rem; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .5rem; }
+.lede { font-size: 1.1rem; color: var(--muted); margin: 0 0 1.5rem; }
+nav { margin-bottom: 1rem; }
+nav h2 { font-size: 1rem; margin: 0 0 .25rem; }
+nav ol { margin: 0; padding-left: 1.25rem; columns: 2; column-gap: 2rem; }
+@media (max-width: 560px) { nav ol { columns: 1; } }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+section h2 { font-size: 1.35rem; margin: 0 0 .5rem; }
+h3 { font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: .75rem 1rem;
+  overflow-x: auto; font-size: .9rem; line-height: 1.45; }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace; }
+p code, li code, td code { background: var(--code-bg); border-radius: 4px; padding: 0 .25rem; font-size: .92em; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); padding: .45rem .5rem; }
+th { font-weight: 700; }
+.note { border-left: 4px solid var(--accent); padding: .25rem 0 .25rem .9rem; margin: 1rem 0; }
+footer { color: var(--muted); font-size: .95rem; padding: 1rem 16px 3rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the runbook</a>
+<header>
+  <h1>knowledgelayer runbook</h1>
+  <p class="lede">A step-by-step guide to keeping a knowledge layer beside a reproducible analytical
+    pipeline: who holds which project, what connects to what, and how each review decision was made.</p>
+  <p>Also: the <a href="sample-review-page.html">sample review page</a> (what a reviewer sees);
+    the guide, in R: <code>vignette("knowledge-layer", package = "knowledgelayer")</code>; and the
+    <a href="https://github.com/philippa-mk/knowledgelayer">source and README</a>.</p>
+</header>
+<nav aria-labelledby="toc-h">
+  <h2 id="toc-h">On this page</h2>
+  <ol>
+    <li><a href="#install">Install, and what IT needs</a></li>
+    <li><a href="#setup">Set up the knowledge folder</a></li>
+    <li><a href="#projects">Register projects and links</a></li>
+    <li><a href="#vocab">Describe work with the shared vocabulary</a></li>
+    <li><a href="#single">Find single points of knowledge</a></li>
+    <li><a href="#board">Keep a project board</a></li>
+    <li><a href="#review">Run a review end to end</a> (see the <a href="sample-review-page.html">sample</a>)</li>
+    <li><a href="#gate">Gate the pipeline on the review</a></li>
+    <li><a href="#log">Keep the decision log honest</a></li>
+    <li><a href="#measure">Measure your city's data infrastructure</a></li>
+    <li><a href="#vc">Add version control</a></li>
+    <li><a href="#terms">Terms used here</a></li>
+  </ol>
+</nav>
+<main id="main" tabindex="-1">
+
+<section aria-labelledby="install">
+  <h2 id="install">1. Install, and what IT needs</h2>
+  <p>The source is public at <a href="https://github.com/philippa-mk/knowledgelayer">github.com/philippa-mk/knowledgelayer</a>,
+    so IT can read all of it before anything is downloaded. Download <code>knowledgelayer_0.2.0.tar.gz</code> from the
+    repository's Releases page and, once it is approved, in R:</p>
+  <pre tabindex="0"><code>install.packages("knowledgelayer_0.2.0.tar.gz", repos = NULL, type = "source")
+library(knowledgelayer)</code></pre>
+  <p>Use the full path to the file if it is not in your working directory.</p>
+  <h3>For the IT approval request</h3>
+  <table>
+    <tr><th scope="row">License</th><td>MIT</td></tr>
+    <tr><th scope="row">Needs</th><td>R 4.1 or later, and the <code>jsonlite</code> package, which is not
+      part of base R: ask IT to approve it alongside this package if it isn't installed. Optional:
+      <code>openssl</code> (stronger fingerprints; safe to add later), <code>targets</code> (pipeline gating),
+      <code>knitr</code> and <code>rmarkdown</code> (only to rebuild the guides).</td></tr>
+    <tr><th scope="row">Browser</th><td><code>kl_runbook()</code> opens this page in the default browser. The
+      review page keeps a draft in browser storage until it is exported or cleared.</td></tr>
+    <tr><th scope="row">Network</th><td>None. No function contacts the internet. The review page and this
+      runbook load nothing external and send nothing anywhere.</td></tr>
+    <tr><th scope="row">Compiled code</th><td>None. Pure R, so on R 4.2 or later Windows does not need Rtools.
+      On R 4.1 under Windows, CRAN no longer serves ready-built packages: install <code>jsonlite</code> first
+      from CRAN's archive host with
+      <code>install.packages("jsonlite", repos = "https://cran-archive.r-project.org", type = "binary")</code>,
+      or install Rtools40, or upgrade R. (The package's own R 4.1 Windows test run uses a dated January 2024
+      package-manager snapshot; that affects the test run only.)</td></tr>
+    <tr><th scope="row">Writes</th><td>Only inside the folder you point it at, plus the review page's
+      draft storage in the reviewer's own browser.</td></tr>
+    <tr><th scope="row">Source</th><td>Public at <a href="https://github.com/philippa-mk/knowledgelayer">github.com/philippa-mk/knowledgelayer</a>.</td></tr>
+    <tr><th scope="row">Integrity</th><td>Compare the file's SHA-256 checksum with the one published on the Releases page.
+      On Windows: <code>certutil -hashfile knowledgelayer_0.2.0.tar.gz SHA256</code></td></tr>
+  </table>
+</section>
+
+<section aria-labelledby="setup">
+  <h2 id="setup">2. Set up the knowledge folder</h2>
+  <p>Pick a folder the team can reach, such as a shared drive or the root of an RStudio project, and
+    create the layer there once:</p>
+  <pre tabindex="0"><code>kl_init("S:/Analytics")
+options(knowledgelayer.path = "S:/Analytics")</code></pre>
+  <p>This creates <code>knowledge/</code>, holding a project registry, the links between projects, a
+    board, an append-only decision log and a <code>handoffs/</code> folder. Every file is plain text.
+    Put the <code>options()</code> line in your <code>.Rprofile</code> so you never pass the folder again.</p>
+</section>
+
+<section aria-labelledby="projects">
+  <h2 id="projects">3. Register projects and links</h2>
+  <p>One entry per piece of work. Write down, while it is fresh, what a colleague would need if you were
+    out tomorrow.</p>
+  <pre tabindex="0"><code>kl_add_project("annual-2026", "Annual performance report 2026",
+               owner = "Your Name",
+               sources = c("Case management extract", "Complaint intake records"),
+               methods = "targets pipeline",
+               location = "S:/Analytics/annual-2026")
+
+kl_add_project("annual-2025", "Annual performance report 2025",
+               owner = "Your Name", status = "done")
+kl_link("annual-2026", "annual-2025", "reuses-code-from")
+kl_find("complaint")     # has anyone here already worked with this?</code></pre>
+  <p>Links are what make it a knowledge layer rather than a list: they show which projects share code,
+    data or a method, so a change in one is checked against the others.</p>
+</section>
+
+<section aria-labelledby="vocab">
+  <h2 id="vocab">4. Describe work with the shared vocabulary</h2>
+  <p>Two people rarely describe the same work in the same words. The package ships a shared vocabulary
+    for oversight work (audit concepts, report types, kinds of criteria, a typology of findings and the
+    broad program areas), so that work tagged with the same concept is found whatever words it uses.</p>
+  <pre tabindex="0"><code>kl_vocab("findings_typology")             # browse it
+kl_resolve(c("separation of duties", "snow plowing"))
+kl_add_project("vendors-2026", "Vendor payments review", owner = "Your Name",
+               concepts = c("procurement and contracting", "duplicate payment"))
+kl_find("contracting")                   # finds it through the synonym</code></pre>
+  <p><code>kl_resolve()</code> never guesses. A term that matches nothing says <em>no concept</em>; a
+    term that matches more than one concept says <em>ambiguous</em> and lists them, and you choose with
+    <code>scheme =</code>. Tags store short ids such as <code>ft:improper-payments</code>, never web
+    addresses.</p>
+  <h3>Add your office's own terms</h3>
+  <p>The shipped clusters and program areas are starters: meant to be broadly applicable, but they may
+    not fit your office perfectly. Some are typically run by states or counties; if your office does not
+    oversee them, ignore them.</p>
+  <p>Your program areas, agencies and house terms go in a local layer,
+    <code>knowledge/vocabulary.json</code>, which sits over the shipped vocabulary and never changes it.
+    Program areas can come straight from a spreadsheet with the columns <code>id</code>,
+    <code>prefLabel</code>, <code>altLabels</code> and <code>broader</code>:</p>
+  <pre tabindex="0"><code>kl_vocab_import("program-areas.csv")       # every broader must exist, or nothing is imported
+kl_vocab_extend("agencies", "agency:streets", "Department of Streets", altLabels = "Streets")
+kl_vocab_check()                          # dangling ids, cycles, duplicate labels</code></pre>
+  <p>A finding can carry its kind, with <code>typology =</code> in <code>kl_findings()</code>. The review
+    page then shows the kind and its links to the standards. Each link says how precise it is: a link to
+    an exact principle says so, and a link to a whole standard says <em>link to the whole standard, not to
+    this point</em>. To load the vocabulary into a linked-data tool, export it with
+    <code>kl_export_skos("vocab.ttl", base = "https://your.domain/vocab/")</code>: you choose the web
+    address, and there is no default. The vignette <code>vignette("example-city", package =
+    "knowledgelayer")</code> walks through all of it with an invented city.</p>
+</section>
+
+<section aria-labelledby="single">
+  <h2 id="single">5. Find single points of knowledge</h2>
+  <pre tabindex="0"><code>kl_single_points()       # live projects only one person can run
+kl_handoff("annual-2026")  # drafts a handoff note in knowledge/handoffs/</code></pre>
+  <p>The handoff is pre-filled from the registry, links, decision log and board, and marks what only the
+    author can add. The section that matters most is <em>decisions and why</em>: what was done is easy to
+    rebuild, why it was done is what gets lost.</p>
+  <p class="note">The test of a good handoff: could someone new, reading only this note, make the right
+    next move without asking anything?</p>
+</section>
+
+<section aria-labelledby="board">
+  <h2 id="board">6. Keep a project board</h2>
+  <p>Three short lists per project: <strong>Inbox</strong> (new, unsorted), <strong>Roadmap</strong>
+    (decided, with a status) and <strong>Parking lot</strong> (good, not now). Nothing reaches the
+    Roadmap until a person triages it.</p>
+  <pre tabindex="0"><code>i &lt;- kl_inbox("Add district-level rates", "annual-2026", by = "Supervisor")
+kl_triage(i, "TAKE", by = "Your Name")
+kl_roadmap_status(i, "done", checked = "matches WP-7 totals")
+kl_board("annual-2026")</code></pre>
+  <p>Triage choices are TAKE (onto the Roadmap), HOLD (park it), DROP (let it go, and log why) and
+    DISCUSS (leave it for now). "Done" needs a note on how you know it works.</p>
+</section>
+
+<section aria-labelledby="review">
+  <h2 id="review">7. Run a review end to end</h2>
+  <h3>The author</h3>
+  <ol>
+    <li>Gather findings from your independent-review template, and from reading the report as its
+      harshest reader would: <code>kl_review_angles()</code> lists seven angles.</li>
+    <li>Record each finding with a severity, a proposed fix and the verdict you would stand behind.
+      You cannot propose TWEAK: that one is the reviewer's.
+      <pre tabindex="0"><code>findings &lt;- kl_findings(
+  id = c("F1", "F2"),
+  finding = c("312 records appear twice after the address join",
+              "Chart 3 labels the 2025 series as 2024"),
+  severity = c("high", "low"),
+  proposed_fix = c("Deduplicate on record id", "Fix the label"))
+kl_write_findings(findings, "qa/findings.csv")</code></pre></li>
+    <li>Build the review page and email it to the reviewer:
+      <pre tabindex="0"><code>kl_review_page(findings, "qa/REVIEW_annual-2026.html",
+               review_id = "annual-2026-qa", author = "Your Name",
+               return_to = "Your Name (you@example.org)")</code></pre></li>
+  </ol>
+  <h3>The reviewer (no R needed)</h3>
+  <ol>
+    <li>Save the attached page, then open the saved file in Edge, Chrome or Firefox. It will not work in
+      an email preview.</li>
+    <li>For each finding, keep or change the preselected verdict, and add a note wherever the reasoning
+      should be on record. TWEAK and MERGE need a note.</li>
+    <li>Enter your name and click <strong>Export decisions</strong>. Send the downloaded
+      <code>APPROVED_…json</code> file back to the author. Work in progress is saved in the browser, so
+      it is safe to close and come back.</li>
+  </ol>
+  <h3>Back with the author</h3>
+  <pre tabindex="0"><code>v &lt;- kl_read_verdicts(kl_newest_verdicts("qa", review = "annual-2026-qa"))
+kl_rubber_stamp_check(v, kl_read_findings("qa/findings.csv"))</code></pre>
+  <p>The check fails an export that leaves a finding undecided, was made on findings that have since
+    changed, or has a TWEAK or MERGE without a note. It warns on the marks of a sign-off rather than a
+    review: every proposal accepted with no notes, findings never on screen long enough to read, a
+    high-severity finding with no comment, or an author reviewing their own work. The page tells the
+    reviewer that time on screen is recorded.</p>
+</section>
+
+<section aria-labelledby="gate">
+  <h2 id="gate">8. Gate the pipeline on the review</h2>
+  <p>In <code>_targets.R</code>, make the report depend on the gate, so it cannot build until the review
+    is in and has passed:</p>
+  <pre tabindex="0"><code>tar_option_set(packages = "knowledgelayer")
+
+list(
+  tar_target(findings_file, "qa/findings.csv", format = "file"),
+  tar_target(findings, kl_read_findings(findings_file)),
+  tar_target(verdict_file, kl_newest_verdicts("qa", review = "annual-2026-qa"), format = "file"),
+  tar_target(cleared, kl_gate(verdict_file, findings)),
+  tar_target(report, render_report(cleaned_data, cleared))
+)</code></pre>
+  <p><code>cleared</code> holds only the findings to act on, with an <code>instruction</code> column: the
+    proposed fix for a TAKE, the reviewer's note for a TWEAK. Log the review once, outside the pipeline:
+    <code>kl_log_verdicts(kl_read_verdicts(kl_newest_verdicts("qa", review = "annual-2026-qa")))</code>.</p>
+</section>
+
+<section aria-labelledby="log">
+  <h2 id="log">9. Keep the decision log honest</h2>
+  <pre tabindex="0"><code>kl_log_decision("Exclude test records from the intake extract", "approved",
+                by = "Your Name", basis = "Test records carry a fixed prefix",
+                evidence = "WP-04", assurance = "self-reviewed", ref = "annual-2026")
+kl_verify_log()</code></pre>
+  <p>Each entry carries a fingerprint of the one before it, so an edited, removed or reordered earlier
+    entry is caught. Anything above <code>self-reviewed</code> needs a named second person.</p>
+  <h3>What the chain cannot catch alone, and the fix</h3>
+  <p>Someone could rewrite the whole file, or remove the newest entries. At milestones, such as a report
+    going out, record the head somewhere outside the folder:</p>
+  <pre tabindex="0"><code>kl_log_head()                       # e.g. "14:sha256:9f2c…"
+kl_verify_log(expect_head = "14:sha256:9f2c…")</code></pre>
+  <p>Paste the head into the work papers or an email to a supervisor. One writer at a time: two people
+    appending at once on a shared drive can break the chain.</p>
+</section>
+
+<section aria-labelledby="measure">
+  <h2 id="measure">10. Measure your city's data infrastructure</h2>
+  <p>Pipelines need clean, machine-readable data to point at. The UK's LG Inform Plus, a shared data,
+    standards and benchmarking service for English councils, makes a ready checklist of what that supply
+    can look like: 22 capabilities and 15 recurring design patterns.</p>
+  <pre tabindex="0"><code>cl &lt;- kl_checklist()
+kl_uk_terms()                 # UK terms, with the nearest US equivalent
+city &lt;- kl_coverage_new("Your City")</code></pre>
+  <ol>
+    <li><strong>Choose your rows:</strong> keep the ones your office would act on, such as records retention,
+      statutory mandates, data provenance and open-data access.</li>
+    <li><strong>Add your own rows</strong> for local sources the UK model lacks: <code>rbind()</code> them onto
+      <code>kl_checklist()</code> and pass the result as <code>checklist =</code>.</li>
+    <li><strong>Rate only what you have checked,</strong> with dated evidence: <code>kl_coverage_set(city, id,
+      tool, status, evidence, gap)</code>. Unassessed is not the same as missing.</li>
+    <li><strong>Be fair to the owner:</strong> a "missing" is a statement about another agency's system. Say
+      specifically what is absent, and check it with that agency before the matrix leaves your office.</li>
+    <li><strong>Check, then date:</strong> <code>kl_coverage_check(city)</code> before sharing, and recheck yearly.</li>
+  </ol>
+  <p>The method was first worked through in the author's personal DC Inform+ project. The capability
+    structure is drawn from LG Inform Plus public guidance, under the UK's Open Government Licence.</p>
+</section>
+
+<section aria-labelledby="vc">
+  <h2 id="vc">11. Add version control</h2>
+  <p>Git is free, open source and runs on your own machines. GitHub is only one place to
+    host it, and optional.</p>
+  <ol>
+    <li><strong>No server:</strong> IT creates a <em>bare</em> repository on the shared drive. Each analyst
+      clones it locally, works there and pushes back. Do not work directly inside a repository on a
+      network drive.</li>
+    <li><strong>Add the knowledge folder:</strong> commit <code>knowledge/</code> alongside the code.</li>
+    <li><strong>A server inside the network,</strong> once several analysts share a project:
+      <a href="https://forgejo.org">Forgejo</a> (GPLv3 or later; trademarks held by the nonprofit
+      Codeberg e.V.) or <a href="https://about.gitea.com">Gitea</a> (MIT; company-backed by Gitea Ltd,
+      whose subsidiary CommitGo sells a commercial edition). Both work with RStudio's Git pane, and repositories move freely
+      between hosts.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="terms">
+  <h2 id="terms">12. Terms used here</h2>
+  <table>
+    <tr><th scope="row">Reproducible analytical pipeline</th><td>Code that takes raw data to the published output with no manual steps.</td></tr>
+    <tr><th scope="row">Knowledge layer</th><td>The office's plain-file record of its projects, their connections, who holds them, and what was decided.</td></tr>
+    <tr><th scope="row">Single point of knowledge</th><td>Work only one person could run or explain.</td></tr>
+    <tr><th scope="row">Finding</th><td>Anything a reviewer must rule on before work proceeds.</td></tr>
+    <tr><th scope="row">Verdict</th><td>TAKE (do the proposed fix), TWEAK (do it the reviewer's way, per the note), MERGE (same as another finding), HOLD (not this pass), DISCUSS (talk first), DROP (no).</td></tr>
+    <tr><th scope="row">Rubber stamp</th><td>An approval given without a review.</td></tr>
+    <tr><th scope="row">Hash</th><td>A short fingerprint of exact contents; any change gives a different hash.</td></tr>
+    <tr><th scope="row">Bare repository</th><td>A Git repository with no working files, used only for sharing.</td></tr>
+  </table>
+</section>
+
+</main>
+<footer>
+  <p>From Philippa Hawker · <a href="https://philippa.page">philippa.page</a> ·
+    <a href="mailto:hello@philippa.page">hello@philippa.page</a></p>
+  <p>Questions, ideas and improvements are welcome. MIT licensed.</p>
+</footer>
+</body>
+</html>

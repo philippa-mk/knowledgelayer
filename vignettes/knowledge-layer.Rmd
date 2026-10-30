@@ -1,0 +1,333 @@
+---
+title: "A knowledge layer beside your pipeline"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A knowledge layer beside your pipeline}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(knowledgelayer)
+root <- file.path(tempdir(), "office")
+unlink(root, recursive = TRUE)
+```
+
+A reproducible analytical pipeline (RAP: code that takes raw data all the
+way to the published output, with no manual steps) answers *how was this
+number made?* It does not answer *what else in this office touches the same
+data*, *who could run this if its author were out tomorrow*, or *who decided
+to exclude those records, and on what basis*. Those answers usually live in
+people's heads.
+
+This package keeps them in plain files beside the code. That collection of
+files is what it calls a **knowledge layer**: the office's record of its
+projects, how they connect, who holds them, and what was decided.
+
+Nothing here needs a server, a database or a version control system. Every
+file is text that a person can read and a diff tool can compare, so the layer
+works on a shared drive today and moves into version control unchanged later.
+
+For a shorter, step-by-step walkthrough, open the runbook with `kl_runbook()`;
+it links to a sample review page you can click around in. The README, on the
+package's source page, covers installing and what IT needs.
+
+Every function takes a `path` to the folder holding the layer. Set it once
+instead:
+
+```{r}
+kl_init(root)
+options(knowledgelayer.path = root)
+```
+
+## 1. Register the work, and connect it
+
+```{r}
+kl_add_project("annual-2025", "Annual performance report 2025",
+               owner = "Analyst A", status = "done",
+               sources = "Case management extract", methods = "targets pipeline")
+kl_add_project("annual-2026", "Annual performance report 2026",
+               owner = "Analyst A",
+               sources = c("Case management extract", "Complaint intake records"),
+               methods = c("targets pipeline", "text matching on complaint narratives"),
+               location = "S:/Analytics/annual-2026")
+kl_add_project("mentorship-survey", "Mentorship survey analysis",
+               owner = "Analyst B", people = c("Analyst B", "Analyst C"),
+               sources = "Survey platform export")
+
+kl_link("annual-2026", "annual-2025", "reuses-code-from")
+kl_link("mentorship-survey", "annual-2026", "shares-method-with",
+        note = "same demographic join")
+
+kl_projects()[, c("id", "owner", "n_people", "status")]
+```
+
+Before starting anything new, search what the office already knows:
+
+```{r}
+kl_find("complaint")[, c("id", "title", "owner")]
+```
+
+## 2. Find the single points of knowledge
+
+A **single point of knowledge** is work that only one person could run or
+explain. If they are out, it stops.
+
+```{r}
+kl_single_points()
+```
+
+## 3. Keep a board, so ideas are written down without being promised
+
+Every project collects "we should also..." ideas. Put them in the Inbox the
+moment they come up; nothing reaches the Roadmap until a person triages it.
+Parking says "not now" without saying "never".
+
+```{r}
+i1 <- kl_inbox("Add district-level rates", "annual-2026", by = "Supervisor S")
+i2 <- kl_inbox("Rewrite the cleaning step in data.table", "annual-2026")
+i3 <- kl_inbox("Interactive map of complaint density", "annual-2026")
+kl_triage(c(i1, i2, i3), c("TAKE", "HOLD", "DROP"), by = "Analyst A",
+          reasons = c("", "after the report ships", "outside this report's remit"))
+kl_roadmap_status(i1, "doing")
+kl_board("annual-2026")
+```
+
+A dropped idea goes into the decision log, so it is not argued again from
+scratch next year. "Done" requires saying how you know it works.
+
+## 4. Write the handoff before you need it
+
+The fix for a single point of knowledge is a written handoff.
+`kl_handoff()` drafts one from what the layer already knows (sources,
+links, decisions, the board) and marks what only the author can add. The
+section that matters most is *decisions and why*: what was done is easy to
+rebuild, but why it was done is what gets lost.
+
+```{r}
+note <- kl_handoff("annual-2026")
+cat(readLines(note), sep = "\n")
+```
+
+## 5. Measure what your jurisdiction's data infrastructure offers
+
+One of the usual barriers to adopting reproducible pipelines is not skill
+but supply: clean, machine-readable data to point them at. That is worth
+measuring, because it tells an oversight office what it can automate today
+and what it will have to request, build or recommend.
+
+The UK, where reproducible analytical pipelines began, also has a model for
+the supply side. The Local Government Association runs LG Inform Plus, a
+shared data, standards and benchmarking service for English councils. Its
+catalog of capabilities makes a good checklist: for each thing it offers,
+does a local tool deliver it here?
+
+```{r}
+cl <- kl_checklist()
+table(cl$theme, cl$kind)
+```
+
+The 22 *capabilities* are things a service does (a records-retention
+register, an open-data API, a benchmarking club). The 15 *patterns* are
+design habits that recur across them (identifiers in web addresses,
+versioned changelogs, public by default). The rows are written in UK
+local-government language; `kl_uk_terms()` translates it:
+
+```{r}
+head(kl_uk_terms()[, c("term", "us_nearest")], 8)
+```
+
+### Fit it to your city
+
+1. **Choose your rows.** Not every row matters to an oversight office.
+   Records retention, statutory mandates, data provenance and open-data
+   access usually do; a council's internal publishing tools may not. Drop the
+   rest, so the matrix measures what your office would act on.
+2. **Translate as you go.** Read each row with `kl_uk_terms()` open. Where
+   the US has no close equivalent, keep the row: an absence can be the
+   finding.
+3. **Add your own rows** for local sources the UK model doesn't have:
+   ```r
+   mine <- data.frame(id = "cap-complaint-narratives", kind = "capability",
+                      theme = "data-and-reports",
+                      capability = "Searchable complaint narratives, available to oversight",
+                      uk_tool = "", uk_status = "")
+   city <- kl_coverage_new("Example City", checklist = rbind(kl_checklist(), mine))
+   ```
+4. **Rate only what you have checked,** with dated evidence a reader can
+   follow. Every row begins *unassessed*, which is different from *missing*:
+   one makes no claim, the other is a finding.
+5. **Be fair to the owner.** A `missing` or `stub` is a statement about
+   another agency's systems. Say specifically what is absent, and check it
+   with the agency that runs the system before the matrix goes beyond your
+   office.
+6. **Check it, then date it.** Run `kl_coverage_check()` before sharing, and
+   recheck yearly: systems change, and every rating carries the date it was
+   true.
+
+A worked start, for an invented city. The tools, gaps and evidence below are
+illustrative only, not a rating of any real place:
+
+```{r}
+city <- kl_coverage_new("Example City")
+city <- kl_coverage_set(city, "cap-api-open-data", tool = "Example City data portal",
+                        status = "stub",
+                        evidence = "Illustrative: the portal's published API documentation",
+                        gap = "Illustrative: datasets have an API, with no shared standards lists behind them")
+city <- kl_coverage_set(city, "pat-12-versioned-changelog", status = "missing",
+                        evidence = "Illustrative: the pages of five high-use datasets",
+                        gap = "Illustrative: no public changelog on the datasets checked")
+kl_coverage_check(city)
+kl_coverage_summary(city, by = "kind")
+```
+
+## 6. Review findings without rubber-stamping them
+
+Independent review is where an office's credibility is made. The weak point
+is the review that happens in someone's inbox: "looks good" leaves no record
+of what was actually decided. Here, findings go onto a review page, each with
+a proposed verdict, and the reviewer's export becomes the record.
+
+Findings come from your existing review template, and from reading the
+report the way its harshest reader will:
+
+```{r}
+kl_review_angles()$angle
+```
+
+Propose the verdict you would stand behind for each finding, or `DISCUSS`
+if you cannot. You cannot propose `TWEAK`: it means "yes, but my way", and
+only the reviewer's note can say what that way is.
+
+```{r}
+findings <- kl_findings(
+  id = c("F1", "F2", "F3"),
+  finding = c("312 records appear twice after the address join",
+              "Chart 3 labels the 2025 series as 2024",
+              "Rate in table 2 uses records, not population, as denominator"),
+  severity = c("high", "low", "high"),
+  proposed_fix = c("Deduplicate on record id before the join",
+                   "Fix the label in the plot function",
+                   "Recompute per 100,000 residents"),
+  source = "independent review checklist")
+
+dir.create(file.path(root, "qa"))
+kl_write_findings(findings, file.path(root, "qa", "findings.csv"))
+
+kl_review_page(findings, file.path(root, "qa", "REVIEW_annual-2026-qa.html"),
+               review_id = "annual-2026-qa",
+               title = "Annual report 2026: independent review",
+               author = "Analyst A", return_to = "Analyst A")
+```
+
+Email the page to the reviewer. They save it, open it in a browser, rule on
+each finding and export `APPROVED_annual-2026-qa_<date>.json`, which they
+send back. The page tells them all of this, and saves their work in the
+browser as they go. Back in R:
+
+```{r, eval = FALSE}
+v <- kl_read_verdicts(kl_newest_verdicts(file.path(root, "qa"), review = "annual-2026-qa"))
+kl_rubber_stamp_check(v, findings)
+```
+
+The check flags the marks of a review that did not happen: every proposal
+accepted with no notes, findings never on screen long enough to read, a
+high-severity finding waved through without comment, an author reviewing
+their own work. It refuses an export that leaves any finding undecided,
+one made on findings that have since changed, and a `TWEAK` with no note,
+because a tweak without a note gives no instruction.
+
+## 7. Let the review gate the pipeline
+
+In a `targets` pipeline, make the report depend on the gate, so it cannot
+build until the review is in and has passed:
+
+```{r, eval = FALSE}
+tar_option_set(packages = "knowledgelayer")
+
+list(
+  tar_target(findings_file, "qa/findings.csv", format = "file"),
+  tar_target(findings, kl_read_findings(findings_file)),
+  tar_target(verdict_file, kl_newest_verdicts("qa", review = "annual-2026-qa"), format = "file"),
+  tar_target(cleared, kl_gate(verdict_file, findings)),
+  tar_target(report, render_report(cleaned_data, cleared))
+)
+```
+
+`kl_gate()` stops with an error if the review failed, and returns only the
+findings cleared for action, with the reviewer's note as the instruction for
+any `TWEAK`. Record the review in the decision log once, outside the
+pipeline, because a target may rerun many times:
+
+```{r, eval = FALSE}
+kl_log_verdicts(kl_read_verdicts(kl_newest_verdicts("qa", review = "annual-2026-qa")))
+```
+
+## 8. Keep a decision log that shows if it was altered
+
+```{r}
+kl_log_decision("Exclude test records from the intake extract", "approved",
+                by = "Analyst A", basis = "Test records carry a fixed prefix",
+                evidence = "WP-04 record filter", assurance = "self-reviewed",
+                ref = "annual-2026")
+kl_log_decision("Use 2024 police district boundaries", "approved",
+                by = "Analyst A", reviewed_by = "Supervisor S",
+                assurance = "peer-reviewed", ref = "annual-2026")
+kl_decisions()[, c("seq", "what", "by", "assurance")]
+kl_verify_log()
+```
+
+Each entry carries the hash (a fingerprint of its exact contents) of the
+one before it. Edit, remove or reorder an earlier entry and
+`kl_verify_log()` names the first one that no longer fits. Assurance levels
+are checked too: anything above `self-reviewed` needs a named second person.
+
+What the chain cannot catch by itself is someone rewriting the whole file,
+or removing the newest entries. For that, record the head outside the
+folder at milestones, such as when a report goes out:
+
+```{r}
+head <- kl_log_head()
+kl_verify_log(expect_head = head)
+```
+
+Paste the head into the work papers or an email to a supervisor. Any later
+check against it fails if the log was rewritten or cut short since. One
+writer at a time: two people appending at the same moment on a shared drive
+can break the chain.
+
+## A note on version control
+
+Git, the version control system, is free and open source, maintained by an
+independent community; it runs entirely on your own machines and needs no
+account with anyone. GitHub is one of several places people *host* Git
+repositories, and using it is optional. When your office is
+ready, this whole `knowledge/` folder goes into Git as it stands.
+
+To start with no server at all, IT can create a *bare* repository (a Git
+repository with no working files, used only to share) on the shared drive.
+Each analyst clones it to their own machine, works there, and pushes back.
+Don't work directly inside a repository that sits on the shared drive: network
+drives and Git's working files don't mix well.
+
+If the office wants what GitHub offers (a shared place to browse code, review
+changes before they are merged, and track issues) on a server it controls,
+two open-source options run entirely inside the network:
+
+- **Forgejo** (<https://forgejo.org>), licensed GPLv3 or later. A community
+  project; its trademarks and domains are held by Codeberg e.V., a German
+  nonprofit association.
+- **Gitea** (<https://about.gitea.com>), licensed MIT. Forgejo began as a fork
+  of Gitea in 2022 and has developed separately since 2024. Gitea is
+  company-backed (Gitea Ltd); a commercial edition is sold by its subsidiary,
+  CommitGo.
+
+Both are light enough for a modest internal machine and work with RStudio's
+built-in Git pane. The repositories they hold are ordinary Git repositories
+that can move to any other host later, so choosing one locks nothing in.
+Either goes through your software vetting like any other tool.
+
+A sensible order: a bare repository on the shared drive first, the
+knowledge layer beside it, and a Forgejo or Gitea server once more than one
+analyst is working on the same project.

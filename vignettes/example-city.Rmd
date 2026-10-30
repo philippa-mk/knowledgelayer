@@ -1,0 +1,158 @@
+---
+title: "Example City: a shared vocabulary"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example City: a shared vocabulary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(knowledgelayer)
+root <- file.path(tempdir(), "example-city")
+unlink(root, recursive = TRUE)
+```
+
+Two analysts in the same office describe the same work in different words.
+One registers a "vendor payments extract", the other a "contracting
+review". A search for either finds only one. A **shared vocabulary** fixes
+that: both are tagged with the same concept, and a search for any of its
+names finds both.
+
+This vignette follows the inspector general's office of Example City, an
+invented city with invented program areas, as it starts using the
+vocabulary that ships with the package.
+
+## What ships
+
+```{r}
+kl_init(root)
+v <- kl_vocab(path = root)
+table(v$scheme)
+```
+
+Each concept has a short id, a preferred label and alternative labels: the
+abbreviations, older names and everyday words people actually use. The
+short ids are the stable identifiers. Tags store them, never a web address.
+
+```{r}
+ft <- kl_vocab("findings_typology", path = root)
+head(ft[, c("id", "prefLabel")], 8)
+```
+
+## From free text to a concept
+
+`kl_resolve()` matches a term against every label, ignoring case and extra
+spaces. It never guesses. A term that matches nothing is reported as
+`"no concept"`, and a term that matches more than one concept is reported as
+`"ambiguous"`, with the candidates.
+
+```{r}
+r <- kl_resolve(c("separation of duties", "embezzlement", "snow plowing"), path = root)
+r[, c("term", "status", "id", "candidates")]
+```
+
+"Embezzlement" is a synonym both of fraud as an oversight concept and of
+fraud as a kind of finding. Say which scheme you mean:
+
+```{r}
+kl_resolve("embezzlement", scheme = "findings_typology", path = root)$id
+```
+
+## Example City's own program areas
+
+Every office has program areas, and they are its own. The vocabulary ships
+nine broad clusters and a set of common program areas under them. They are
+starters: meant to be broadly applicable, but they may not fit every
+office perfectly. Some, such as Medicaid or TANF, are typically run by
+states or counties, and an office that does not oversee them can ignore
+them. Look at what is there before adding anything:
+
+```{r}
+pa <- kl_vocab("program_areas", path = root)
+nrow(pa)
+head(pa[pa$broader == "cluster:infrastructure", c("id", "prefLabel")])
+```
+
+Example City keeps its own areas in a spreadsheet, each one placed under a
+cluster or under another area:
+
+```{r}
+csv <- file.path(tempdir(), "example-city-areas.csv")
+writeLines(c(
+  "id,prefLabel,altLabels,broader",
+  "area:snow,Snow and Ice Control,snow plowing; road salting,cluster:infrastructure",
+  "area:bridges,Bridge Inspection,bridge maintenance,cluster:infrastructure",
+  "area:harbor,Harbor Authority Operations,harbor; port operations,cluster:economic-development",
+  "area:meals,Senior Meals Program,meals on wheels,cluster:human-services"
+), csv)
+kl_vocab_import(csv, path = root)
+```
+
+The import checks every row before it writes any: if one area points at a
+`broader` that does not exist, nothing is imported. The result is the
+vocabulary check, run on the shipped set and the office's terms together.
+The warnings are labels shared by two schemes on purpose, such as "audit"
+the activity and "audit" the report.
+
+The areas are kept in `knowledge/vocabulary.json`, beside the shipped
+vocabulary and never written into it. Single terms are added the same way:
+
+```{r}
+kl_vocab_extend("agencies", "agency:streets", "Example City Department of Streets",
+                altLabels = c("Streets", "DoS"), path = root)
+kl_resolve("snow plowing", path = root)$id
+```
+
+## Tagging the work
+
+```{r}
+kl_add_project("snow-2026", "Winter road treatment review", owner = "Analyst A",
+               sources = "Fleet GPS logs", concepts = c("snow and ice control", "contracting"),
+               path = root)
+kl_add_project("vendors-2026", "Vendor payments extract", owner = "Analyst B",
+               sources = "Accounts payable", path = root)
+kl_tag("project", "vendors-2026", c("procurement and contracting", "duplicate payment"), path = root)
+kl_find("contracting", path = root)[, c("id", "title")]
+```
+
+Neither project mentions "contracting" in its own words, and both are found.
+
+## Findings carry their kind
+
+A finding's `typology` says what kind of deficiency it is. The review page
+then shows the kind and its crosswalks to the standards it relates to, each
+labeled with how precise its link is.
+
+```{r}
+f <- kl_findings(
+  id = c("F1", "F2"),
+  finding = c("The same clerk enters and approves salt purchase orders",
+              "Two plow contracts were paid twice in February"),
+  severity = c("high", "high"),
+  proposed_fix = c("Separate entry and approval", "Recover the duplicate payments"),
+  typology = c("segregation of duties", "improper payment"), path = root)
+f[, c("id", "typology")]
+```
+
+On its own, "improper payment" is ambiguous: it is also the name of a
+program area. Here the context settles it, because a finding's kind can
+only come from the findings typology. `kl_resolve()` with no context still
+declines to choose, and lists both.
+
+A link that goes to an exact principle says so. A link to a whole standard
+says "link to the whole standard, not to this point", so nobody mistakes a
+general citation for a precise one.
+
+## Exporting as SKOS
+
+To load the vocabulary into a linked-data tool, export it as Turtle.
+The package does not choose a web address for the concepts: you supply
+`base`, and there is no default.
+
+```{r}
+ttl <- file.path(tempdir(), "example-city.ttl")
+kl_export_skos(ttl, base = "https://data.example.org/vocab/", projects = TRUE, path = root)
+cat(readLines(ttl)[grep("area/snow> a", readLines(ttl)) + 0:4], sep = "\n")
+```

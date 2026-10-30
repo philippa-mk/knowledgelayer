@@ -1,0 +1,29 @@
+# Runs the leak scan's public rules on every change: local paths, e-mail
+# addresses and account names in any tracked file or commit message, and
+# hosting namespaces and URIs outside crosswalks in the shipped vocabulary.
+# A maintainer-side check, with rules that are not published, runs before
+# each release; this job says in its output that it did not. Also
+# self-tests the scanner. Read-only.
+name: leak-scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  leak-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Self-test the scanner
+        run: python3 -I data-raw/test_leak_scan.py
+      - name: Scan files and every commit message, back to the root (public rules)
+        run: python3 -I data-raw/leak_scan.py --public-only --history HEAD .

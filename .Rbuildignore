@@ -1,0 +1,10 @@
+^LICENSE\.md$
+^docs$
+^\.gitignore$
+^\.github$
+^data-raw$
+^VOCABULARY\.md$
+^tests/MUTATION_LOG\.md$
+^\.git$
+^private$
+^review$

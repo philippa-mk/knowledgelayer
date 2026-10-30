@@ -1,0 +1,3637 @@
+{
+ "schema": "kl-vocabulary/1",
+ "source": {
+  "name": "constellation-core",
+  "file": "data/taxonomy/taxonomy.json",
+  "version": "0.18.1",
+  "sha256": "3ad05b0a5ba066fe662b73fc1629d8429bed4af3efcc796811cde82de08f994e",
+  "commit": "81b4cea65365a450f121769e3b28674dc652486b"
+ },
+ "program_areas_review": {
+  "review": "program-areas-2026-10-30-knowledgelayer",
+  "exportedAt": "2026-10-30T14:12:28.912Z",
+  "sha256": "262811d3e1f905c8a579eb62c48b5cee1140adf2e07d4e3488afa614dab0b77f",
+  "shipped": 63,
+  "middle_level": 54
+ },
+ "placeholder": null,
+ "local_edits": [
+  {
+   "id": "cluster:human-services",
+   "why": "Note 1: read as distinct from human resources."
+  },
+  {
+   "id": "concept:personnel-hr",
+   "why": "Note 1, the other side: human resources read as internal operations."
+  },
+  {
+   "id": "concept:public-health",
+   "why": "Note 2: a large clustering point, so its synonyms and definition say what it covers."
+  },
+  {
+   "id": "concept:lead-poisoning",
+   "why": "Note 3: clusters with public health and with water, so related links to both; broader unchanged."
+  },
+  {
+   "id": "concept:dd-waiver",
+   "why": "Note 4: spell out what DD means; \"DD waiver\" kept as a synonym."
+  },
+  {
+   "id": "concept:developmental-disabilities",
+   "why": "Note 4, so that \"DD waiver\" names the waiver alone: on both concepts it would be ambiguous and the build would remove it from both."
+  },
+  {
+   "id": "concept:executive-management-of-agencies",
+   "why": "Neutral public-administration wording."
+  },
+  {
+   "id": "concept:checks-and-balances",
+   "why": "Neutral public-administration wording."
+  },
+  {
+   "id": "concept:oversight-independence",
+   "why": "Neutral public-administration wording."
+  }
+ ],
+ "license": "MIT, the same as the package code (see LICENSE). Crosswalk targets are cited by name and link only.",
+ "schemes": {
+  "oversight_concepts": {
+   "label": "Oversight and Audit Concepts",
+   "description": "Core terminology for government oversight, audit findings and accountability work."
+  },
+  "report_types": {
+   "label": "Oversight Report Types",
+   "description": "Kinds of report produced by inspectors general, auditors and similar oversight bodies."
+  },
+  "criteria_types": {
+   "label": "Criteria Types",
+   "description": "Kinds of legal and professional standard used as criteria in an audit or review."
+  },
+  "findings_typology": {
+   "label": "Findings Typology",
+   "description": "Recurring kinds of deficiency found in oversight work, for grouping findings by how things went wrong. Each kind carries crosswalks to the standards it relates to, each labeled with how precise its link is."
+  },
+  "program_areas": {
+   "label": "Program Areas",
+   "description": "The broad areas of government work an oversight office reviews: top-level clusters, and the program areas within them. An office adds its own with kl_vocab_import()."
+  }
+ },
+ "concepts": [
+  {
+   "id": "concept:anti-corruption",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Anti-Corruption and Ethics",
+   "altLabels": [
+    "anti-corruption",
+    "corruption prevention",
+    "integrity",
+    "conflict of interest",
+    "public integrity"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:governance",
+    "concept:fraud"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "UNCAC",
+     "label": "anti-corruption",
+     "uri": "https://www.unodc.org/corruption/en/uncac/index.html",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:audit",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Audit",
+   "altLabels": [
+    "audit report",
+    "audit review",
+    "examination"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:compliance-audit",
+    "concept:financial-audit",
+    "concept:findings",
+    "concept:performance-audit",
+    "concept:recommendations"
+   ],
+   "related": [
+    "concept:inspection",
+    "concept:evaluation",
+    "concept:findings"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:causal-mapping",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Causal Mapping and Contribution Analysis",
+   "altLabels": [
+    "causal mapping",
+    "causal coding",
+    "contribution analysis",
+    "theory of change mapping",
+    "causal inference (evaluation)",
+    "systems mapping"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:monitoring-evaluation",
+    "concept:evaluation",
+    "concept:implementation-science"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:checks-and-balances",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Checks and Balances",
+   "altLabels": [
+    "separation of powers",
+    "institutional safeguards",
+    "democratic governance",
+    "rule of law",
+    "institutional resilience"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:executive-management-of-agencies"
+   ],
+   "related": [
+    "concept:oversight-independence",
+    "concept:governance",
+    "concept:anti-corruption"
+   ],
+   "scopeNote": "The constitutional and statutory arrangements that let one part of government check another: legislative oversight, independent audit and inspection, courts.",
+   "mappings": []
+  },
+  {
+   "id": "concept:civil-society-oversight",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Civil Society and Think-Tank Oversight",
+   "altLabels": [
+    "civil society",
+    "civic society",
+    "think tank",
+    "NGO oversight",
+    "nonprofit watchdog",
+    "good-government group",
+    "public interest research",
+    "accountability organization"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:oversight-activity",
+    "concept:governance"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "NTEE",
+     "label": "W24 Citizen Participation",
+     "uri": "https://nccs.urban.org/nccs/pubs/ntee-two-page-2005.pdf",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "concept:compliance-audit",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Compliance Audit",
+   "altLabels": [
+    "regulatory compliance",
+    "compliance review",
+    "compliance examination",
+    "compliance testing"
+   ],
+   "broader": [
+    "concept:audit"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:findings",
+    "concept:recommendations"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:contract-admin",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Contract Administration",
+   "altLabels": [
+    "contract management",
+    "contractor oversight",
+    "vendor management",
+    "contract monitoring",
+    "contract compliance"
+   ],
+   "broader": [
+    "concept:procurement"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:procurement-fraud"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:coproduction",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Coproduction of Public Services",
+   "altLabels": [
+    "coproduction",
+    "co-production",
+    "citizen coproduction",
+    "collaborative service delivery"
+   ],
+   "broader": [
+    "concept:government-capacity"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:program-effectiveness",
+    "concept:civil-society-oversight"
+   ],
+   "scopeNote": "Public services produced jointly by government and citizens/communities; academic public-management literature.",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "Wikidata",
+     "label": "co-production",
+     "uri": "https://www.wikidata.org/wiki/Q16324410",
+     "precision": "item",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:enterprise-risk-management",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Enterprise Risk Management (ERM)",
+   "altLabels": [
+    "ERM",
+    "enterprise risk management",
+    "COSO ERM framework",
+    "risk management framework",
+    "organizational risk management"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:internal-controls",
+    "concept:material-weakness"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "COSO",
+     "label": "Enterprise Risk Management—Integrating with Strategy and Performance",
+     "uri": "https://www.coso.org/erm-framework",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "concept:ethics-enforcement",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Ethics Enforcement and Adjudication",
+   "altLabels": [
+    "ethics adjudication",
+    "government ethics",
+    "code of conduct enforcement",
+    "ethics filings",
+    "financial disclosure"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:anti-corruption",
+    "concept:fraud-waste-abuse",
+    "concept:whistleblowing"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:evaluation",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Evaluation",
+   "altLabels": [
+    "assessment",
+    "program assessment",
+    "review"
+   ],
+   "broader": [
+    "concept:oversight-activity"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:audit",
+    "concept:inspection",
+    "concept:program-effectiveness"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:evidence-based-policymaking",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Evidence-Based Policymaking",
+   "altLabels": [
+    "federal evidence movement",
+    "evidence act",
+    "data-driven policymaking",
+    "program evaluation evidence",
+    "evidence-building"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:monitoring-evaluation",
+    "concept:program-effectiveness",
+    "concept:evaluation"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:executive-management-of-agencies",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Executive Management of Agencies",
+   "altLabels": [
+    "executive control of agencies",
+    "agency reorganization",
+    "political appointments",
+    "executive orders and directives"
+   ],
+   "broader": [
+    "concept:checks-and-balances"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:government-capacity",
+    "concept:oversight-independence",
+    "concept:rulemaking"
+   ],
+   "scopeNote": "How elected executives direct agencies: appointments, reorganization, budgets and administrative directives.",
+   "mappings": []
+  },
+  {
+   "id": "concept:federal-passthrough",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Federal Pass-Through Monitoring",
+   "altLabels": [
+    "pass-through",
+    "subrecipient monitoring",
+    "federal sub-award",
+    "subgrant monitoring"
+   ],
+   "broader": [
+    "concept:grant-compliance"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:financial-audit",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Financial Audit",
+   "altLabels": [
+    "financial examination",
+    "fiscal audit",
+    "annual audit",
+    "CAFR audit",
+    "financial statement audit"
+   ],
+   "broader": [
+    "concept:audit"
+   ],
+   "narrower": [
+    "concept:single-audit"
+   ],
+   "related": [
+    "concept:internal-controls",
+    "concept:material-weakness",
+    "concept:financial-management"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:findings",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Findings",
+   "altLabels": [
+    "audit findings",
+    "deficiencies",
+    "issues identified",
+    "reportable conditions",
+    "observations",
+    "noted deficiencies"
+   ],
+   "broader": [
+    "concept:audit"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:recommendations",
+    "concept:material-weakness",
+    "concept:internal-controls"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:fraud",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Fraud",
+   "altLabels": [
+    "fraud investigation",
+    "waste fraud abuse",
+    "WFA",
+    "waste and abuse",
+    "malfeasance",
+    "misappropriation",
+    "embezzlement",
+    "corruption"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:procurement-fraud"
+   ],
+   "related": [
+    "concept:procurement-fraud",
+    "concept:grant-compliance"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:fraud-analytics",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Fraud Analytics and Improper Payment Detection",
+   "altLabels": [
+    "fraud analytics",
+    "data analytics for fraud",
+    "improper payment detection",
+    "pre-payment fraud prevention",
+    "fraud prevention platform",
+    "payment integrity analytics",
+    "anomaly detection"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:fraud",
+    "concept:fraud-waste-abuse",
+    "ft:improper-payments"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:fraud-waste-abuse",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Fraud, Waste, and Abuse (FWA)",
+   "altLabels": [
+    "FWA",
+    "fraud waste and abuse",
+    "waste",
+    "abuse",
+    "improper payments prevention",
+    "program integrity"
+   ],
+   "broader": [
+    "concept:oversight-activity"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:fraud",
+    "ft:improper-payments"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:gitc",
+   "scheme": "oversight_concepts",
+   "prefLabel": "General Information Technology Controls",
+   "altLabels": [
+    "GITC",
+    "IT general controls",
+    "IT controls",
+    "ITGC",
+    "information technology controls",
+    "technology controls"
+   ],
+   "broader": [
+    "concept:internal-controls"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:it-cybersecurity"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:governance",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Governance",
+   "altLabels": [
+    "organizational governance",
+    "board governance",
+    "governance structure"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:legislative-oversight"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:government-capacity",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Government Capacity",
+   "altLabels": [
+    "state capacity",
+    "administrative capacity",
+    "government capabilities",
+    "public sector capacity",
+    "institutional capacity"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:coproduction"
+   ],
+   "related": [
+    "concept:program-effectiveness",
+    "concept:evidence-based-policymaking",
+    "concept:governance"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:grant-compliance",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Grant Compliance",
+   "altLabels": [
+    "federal grant",
+    "grant management",
+    "pass-through monitoring",
+    "federal awards",
+    "grant oversight",
+    "Uniform Guidance",
+    "2 CFR 200"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:federal-passthrough",
+    "concept:nonprofit-accountability"
+   ],
+   "related": [
+    "concept:nonprofit-accountability",
+    "concept:federal-passthrough",
+    "concept:cdbg"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:hotline-intake",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Whistleblower Hotline and Complaint Intake",
+   "altLabels": [
+    "hotline",
+    "whistleblower hotline",
+    "complaint intake",
+    "fraud hotline",
+    "tip line"
+   ],
+   "broader": [
+    "concept:whistleblowing"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:fraud-waste-abuse"
+   ],
+   "scopeNote": "Intake channels for whistleblower disclosures and FWA complaints.",
+   "mappings": []
+  },
+  {
+   "id": "concept:implementation-science",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Implementation Science",
+   "altLabels": [
+    "implementation research",
+    "dissemination and implementation",
+    "D&I science",
+    "implementation frameworks",
+    "knowledge translation",
+    "evidence into practice"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:monitoring-evaluation",
+    "concept:recommendation-followup",
+    "concept:program-effectiveness"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:inspection",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Inspection",
+   "altLabels": [
+    "site inspection",
+    "facility inspection",
+    "inspection report"
+   ],
+   "broader": [
+    "concept:oversight-activity"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:audit",
+    "concept:evaluation"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:internal-controls",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Internal Controls",
+   "altLabels": [
+    "internal control",
+    "IC",
+    "controls",
+    "control environment",
+    "control framework",
+    "control deficiency"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:gitc",
+    "concept:material-weakness",
+    "concept:self-attestation"
+   ],
+   "related": [
+    "concept:material-weakness",
+    "concept:gitc",
+    "concept:financial-management"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:legislative-oversight",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Legislative and Congressional Oversight",
+   "altLabels": [
+    "congressional oversight",
+    "council oversight",
+    "legislative oversight",
+    "legislative monitoring",
+    "oversight hearings",
+    "committee oversight"
+   ],
+   "broader": [
+    "concept:governance"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:public-inquiry",
+    "concept:oversight-activity"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "UK-Statutory-Guidance",
+     "label": "Overview and scrutiny: statutory guidance for councils, combined authorities and combined county authorities",
+     "uri": "https://www.gov.uk/government/publications/overview-and-scrutiny-statutory-guidance-for-councils-and-combined-authorities",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "concept:material-weakness",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Material Weakness",
+   "altLabels": [
+    "significant deficiency",
+    "control weakness",
+    "deficiency",
+    "reportable condition",
+    "adverse opinion",
+    "disclaimer of opinion",
+    "qualified opinion"
+   ],
+   "broader": [
+    "concept:internal-controls"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:audit",
+    "concept:financial-audit"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:monitoring-evaluation",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Monitoring and Evaluation (M&E)",
+   "altLabels": [
+    "M&E",
+    "monitoring and evaluation",
+    "impact evaluation",
+    "evaluation capacity"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:evaluation",
+    "concept:program-effectiveness"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:nonprofit-accountability",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Nonprofit Grantee Accountability",
+   "altLabels": [
+    "nonprofit oversight",
+    "grantee monitoring",
+    "nonprofit governance",
+    "grantee accountability",
+    "nonprofit financial reporting",
+    "cost allowability"
+   ],
+   "broader": [
+    "concept:grant-compliance"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:grant-compliance",
+    "concept:governance"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:oversight-activity",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Oversight Activity",
+   "altLabels": [
+    "oversight activities",
+    "oversight function"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:evaluation",
+    "concept:fraud-waste-abuse",
+    "concept:inspection",
+    "concept:recommendation-followup"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:oversight-independence",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Independence of Oversight Offices",
+   "altLabels": [
+    "IG independence",
+    "auditor independence",
+    "organizational independence",
+    "oversight capacity",
+    "inspector general capacity"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:governance",
+    "concept:oversight-activity"
+   ],
+   "scopeNote": "The organizational independence and resources an audit or oversight office needs to report without interference, as auditing standards require.",
+   "mappings": []
+  },
+  {
+   "id": "concept:performance-audit",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Performance Audit",
+   "altLabels": [
+    "program audit",
+    "operational audit",
+    "efficiency audit",
+    "effectiveness audit",
+    "value for money audit"
+   ],
+   "broader": [
+    "concept:audit"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:evaluation",
+    "concept:program-effectiveness"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAGAS",
+     "label": "Government Auditing Standards (Yellow Book) — Performance Audits",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:place-based-partnerships",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Place-Based Partnerships and Collective Impact",
+   "altLabels": [
+    "place-based partnerships",
+    "collective impact",
+    "place-based initiatives",
+    "cross-sector partnerships"
+   ],
+   "broader": [
+    "concept:program-effectiveness"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:monitoring-evaluation",
+    "concept:poverty-reduction"
+   ],
+   "scopeNote": "Geographically targeted, multi-organization collaborations and their evaluation.",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "Wikidata",
+     "label": "collective impact",
+     "uri": "https://www.wikidata.org/wiki/Q17008286",
+     "precision": "item",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:procurement",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Procurement and Contracting",
+   "altLabels": [
+    "contracting",
+    "procurement process",
+    "purchasing",
+    "acquisitions",
+    "vendor contracts",
+    "solicitation"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:contract-admin"
+   ],
+   "related": [
+    "concept:procurement-fraud",
+    "concept:contract-admin",
+    "concept:small-business-enterprise"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:procurement-fraud",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Procurement Fraud",
+   "altLabels": [
+    "bid rigging",
+    "no-bid contract",
+    "phantom vendor",
+    "shell company",
+    "contract fraud",
+    "procurement irregularity"
+   ],
+   "broader": [
+    "concept:fraud"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:procurement"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:program-effectiveness",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Program Effectiveness",
+   "altLabels": [
+    "program outcomes",
+    "program performance",
+    "effectiveness"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:place-based-partnerships"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:public-inquiry",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Public Inquiry",
+   "altLabels": [
+    "commission of inquiry",
+    "public hearing inquiry",
+    "statutory inquiry",
+    "independent inquiry"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:oversight-activity",
+    "concept:evaluation"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:recommendation-followup",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Recommendation Follow-Up",
+   "altLabels": [
+    "follow-up review",
+    "status of recommendations",
+    "implementation review",
+    "corrective action tracking",
+    "open recommendations"
+   ],
+   "broader": [
+    "concept:oversight-activity"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:recommendations"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:recommendations",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Recommendations",
+   "altLabels": [
+    "audit recommendations",
+    "corrective actions",
+    "management actions",
+    "remediation",
+    "corrective action plan",
+    "CAP"
+   ],
+   "broader": [
+    "concept:audit"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:findings",
+    "concept:recommendation-followup"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:rulemaking",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Rulemaking and Administrative Procedure",
+   "altLabels": [
+    "rulemaking",
+    "administrative procedure",
+    "notice and comment",
+    "regulatory process",
+    "public consultation",
+    "APA process",
+    "sub-regulatory guidance"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:compliance-audit",
+    "concept:governance"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:self-attestation",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Self-Attestation and Verification",
+   "altLabels": [
+    "self-attestation",
+    "self-certification",
+    "attestation",
+    "self-reported certification",
+    "verification vs self-attestation"
+   ],
+   "broader": [
+    "concept:internal-controls"
+   ],
+   "narrower": [],
+   "related": [
+    "ft:eligibility-error",
+    "ft:improper-payments"
+   ],
+   "scopeNote": "Reliance on self-reported certifications versus independent verification; a recurring internal-control weakness theme.",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Standards for Internal Control in the Federal Government (GAO-25-107721)",
+     "uri": "https://www.gao.gov/greenbook",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "concept:single-audit",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Single Audit",
+   "altLabels": [
+    "A-133 audit",
+    "OMB A-133",
+    "Uniform Guidance audit",
+    "federal single audit",
+    "2 CFR 200 audit"
+   ],
+   "broader": [
+    "concept:financial-audit"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:grant-compliance",
+    "concept:federal-passthrough"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "OMB-Uniform-Guidance",
+     "label": "2 CFR part 200, Subpart F—Audit Requirements",
+     "uri": "https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-F",
+     "precision": "section",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "concept:supreme-audit-institution",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Supreme Audit Institution (International)",
+   "altLabels": [
+    "SAI",
+    "supreme audit institution",
+    "national audit office",
+    "NAO",
+    "auditor general",
+    "INTOSAI",
+    "external public audit"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:audit",
+    "concept:performance-audit"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "INTOSAI",
+     "label": "Supreme Audit Institution",
+     "uri": "https://idi.no/our-work/initiative/what-are-sais/",
+     "precision": "item",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:three-horizons",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Three Horizons Framework",
+   "altLabels": [
+    "three horizons",
+    "3 horizons",
+    "H1 H2 H3",
+    "horizon scanning framework"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:government-capacity",
+    "concept:evidence-based-policymaking",
+    "concept:enterprise-risk-management"
+   ],
+   "scopeNote": "A foresight/strategy framework distinguishing the prevailing system (H1), disruptive innovations (H3), and transition activity (H2); cited in government-reform literature as a tool for structuring reform and transformation agendas.",
+   "mappings": []
+  },
+  {
+   "id": "concept:whistleblowing",
+   "scheme": "oversight_concepts",
+   "prefLabel": "Whistleblowing and Whistleblower Protection",
+   "altLabels": [
+    "whistleblower",
+    "whistleblower protection",
+    "speak up",
+    "disclosure of wrongdoing",
+    "reprisal protection",
+    "retaliation protection",
+    "protected disclosure"
+   ],
+   "broader": [
+    "cluster:oversight"
+   ],
+   "narrower": [
+    "concept:hotline-intake"
+   ],
+   "related": [
+    "concept:fraud",
+    "concept:oversight-activity"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Wikidata",
+     "label": "whistleblower",
+     "uri": "https://www.wikidata.org/wiki/Q26102",
+     "precision": "item",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:annual-plan",
+   "scheme": "report_types",
+   "prefLabel": "Annual Plan",
+   "altLabels": [
+    "work plan",
+    "annual work plan",
+    "audit plan"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "report:annual-report",
+   "scheme": "report_types",
+   "prefLabel": "Annual Report",
+   "altLabels": [
+    "Semiannual Report",
+    "annual performance report"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "report:audit",
+   "scheme": "report_types",
+   "prefLabel": "Audit Report",
+   "altLabels": [
+    "audit"
+   ],
+   "broader": [],
+   "narrower": [
+    "report:financial-audit",
+    "report:inspection-evaluation",
+    "report:performance-audit"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAGAS",
+     "label": "Government Auditing Standards (Yellow Book) — Audits",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:evaluation",
+   "scheme": "report_types",
+   "prefLabel": "Evaluation",
+   "altLabels": [
+    "program evaluation",
+    "policy evaluation"
+   ],
+   "broader": [
+    "report:inspection-evaluation"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "CIGIE",
+     "label": "CIGIE Quality Standards for Inspection and Evaluation (Blue Book) — Evaluation",
+     "uri": "https://www.ignet.gov/sites/default/files/files/QualityStandardsforInspectionandEvaluation-2020.pdf",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:financial-audit",
+   "scheme": "report_types",
+   "prefLabel": "Financial Audit Report",
+   "altLabels": [
+    "financial audit",
+    "financial statement audit"
+   ],
+   "broader": [
+    "report:audit"
+   ],
+   "narrower": [
+    "report:independent-auditor"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAGAS",
+     "label": "Yellow Book: Government Auditing Standards (financial audits)",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "report:followup",
+   "scheme": "report_types",
+   "prefLabel": "Recommendation Follow-Up",
+   "altLabels": [
+    "follow-up",
+    "recommendation status",
+    "corrective action follow-up",
+    "open recommendations review"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "report:independent-auditor",
+   "scheme": "report_types",
+   "prefLabel": "Independent Auditor Report",
+   "altLabels": [
+    "IAR",
+    "independent auditor's report",
+    "contracted audit report"
+   ],
+   "broader": [
+    "report:financial-audit"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "AICPA-GAAS",
+     "label": "Independent Auditor's Report (AICPA Generally Accepted Auditing Standards)",
+     "uri": "https://www.aicpa-cima.com/resources/landing/audit-attest-and-quality-management-standards",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:inspection",
+   "scheme": "report_types",
+   "prefLabel": "Inspection",
+   "altLabels": [
+    "site inspection",
+    "operational inspection"
+   ],
+   "broader": [
+    "report:inspection-evaluation"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "CIGIE",
+     "label": "CIGIE Quality Standards for Inspection and Evaluation (Blue Book) — Inspection",
+     "uri": "https://www.ignet.gov/sites/default/files/files/QualityStandardsforInspectionandEvaluation-2020.pdf",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:inspection-evaluation",
+   "scheme": "report_types",
+   "prefLabel": "Inspection and Evaluation",
+   "altLabels": [
+    "I&E",
+    "inspections and evaluations",
+    "program review"
+   ],
+   "broader": [
+    "report:audit"
+   ],
+   "narrower": [
+    "report:evaluation",
+    "report:inspection"
+   ],
+   "related": [],
+   "scopeNote": "Grouping concept — individual records use Inspection or Evaluation as discrete report_type values.",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "CIGIE",
+     "label": "CIGIE Quality Standards for Inspection and Evaluation (Blue Book)",
+     "uri": "https://www.ignet.gov/sites/default/files/files/QualityStandardsforInspectionandEvaluation-2020.pdf",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:investigation",
+   "scheme": "report_types",
+   "prefLabel": "Investigation Report",
+   "altLabels": [
+    "investigation",
+    "criminal referral report",
+    "investigative report"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "CIGIE",
+     "label": "CIGIE Quality Standards for Investigations",
+     "uri": "https://www.ignet.gov/sites/default/files/files/Quality%20Standards%20for%20Investigations%20July-2025.pdf",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "report:performance-audit",
+   "scheme": "report_types",
+   "prefLabel": "Performance Audit Report",
+   "altLabels": [
+    "performance audit"
+   ],
+   "broader": [
+    "report:audit"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAGAS",
+     "label": "Yellow Book: Government Auditing Standards (performance audits)",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "criteria:consent-decree",
+   "scheme": "criteria_types",
+   "prefLabel": "Consent Decree",
+   "altLabels": [
+    "court order",
+    "settlement agreement",
+    "federal consent decree",
+    "judicial order",
+    "decree"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "Wikidata",
+     "label": "consent decree",
+     "uri": "https://www.wikidata.org/wiki/Q5162854",
+     "precision": "item",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "criteria:international-standard",
+   "scheme": "criteria_types",
+   "prefLabel": "International Standard",
+   "altLabels": [
+    "international equivalent",
+    "INTOSAI",
+    "ISSAI",
+    "supreme audit institution standard",
+    "OECD",
+    "OECD Recommendation on Public Integrity",
+    "ISO",
+    "ISO 37001",
+    "ISO 9001",
+    "UNCAC",
+    "UN Convention against Corruption",
+    "international anti-corruption framework",
+    "international governance guideline"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "INTOSAI",
+     "label": "INTOSAI Framework of Professional Pronouncements (ISSAI)",
+     "uri": "https://www.issai.org/about/",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "criteria:law",
+   "scheme": "criteria_types",
+   "prefLabel": "Law",
+   "altLabels": [
+    "statute",
+    "federal law",
+    "act",
+    "legislation",
+    "legal requirement"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "criteria:policy",
+   "scheme": "criteria_types",
+   "prefLabel": "Policy",
+   "altLabels": [
+    "agency policy",
+    "general order",
+    "standard operating procedure",
+    "SOP",
+    "administrative policy",
+    "internal policy"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAGAS",
+     "label": "Entity policies, procedures, and standard operating procedures as audit criteria",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "criteria:regulation",
+   "scheme": "criteria_types",
+   "prefLabel": "Regulation",
+   "altLabels": [
+    "rule",
+    "regulatory requirement",
+    "CFR",
+    "regulatory standard"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "criteria:standard",
+   "scheme": "criteria_types",
+   "prefLabel": "Professional Standard",
+   "altLabels": [
+    "best practice",
+    "industry standard",
+    "professional guideline",
+    "accreditation standard",
+    "GAGAS",
+    "government auditing standards",
+    "yellow book"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Standards for Internal Control in the Federal Government (Green Book) — professional standards as criteria",
+     "uri": "https://www.gao.gov/greenbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:access-management-deficiency",
+   "scheme": "findings_typology",
+   "prefLabel": "Logical Access and Access Management Deficiency",
+   "altLabels": [
+    "excessive access",
+    "access not deprovisioned",
+    "inappropriate user access",
+    "access management weakness",
+    "privileged access not reviewed",
+    "stale accounts",
+    "access recertification failure"
+   ],
+   "broader": [
+    "ft:it-control-weakness"
+   ],
+   "narrower": [],
+   "related": [
+    "ft:segregation-of-duties",
+    "concept:gitc"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "NIST-SP-800-53",
+     "label": "Access Control (AC) control family",
+     "uri": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:asset-inventory-control",
+   "scheme": "findings_typology",
+   "prefLabel": "Inadequate Asset or Inventory Control",
+   "altLabels": [
+    "inventory control weakness",
+    "fixed asset control",
+    "capital asset tracking",
+    "property management",
+    "missing assets",
+    "unrecorded assets"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:internal-controls"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "OMB-Uniform-Guidance",
+     "label": "2 CFR 200.313 — Equipment / property management and physical inventory",
+     "uri": "https://www.ecfr.gov/current/title-2/section-200.313",
+     "precision": "section",
+     "verified": "2026-07-27"
+    },
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Principle 10 — Physical control over assets",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-10-design-control-activities/",
+     "precision": "principle",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:data-integrity-issue",
+   "scheme": "findings_typology",
+   "prefLabel": "Data Integrity and Accuracy Issue",
+   "altLabels": [
+    "data integrity",
+    "data accuracy",
+    "inaccurate data",
+    "incomplete data",
+    "data quality deficiency",
+    "system data error",
+    "unreliable reporting data"
+   ],
+   "broader": [
+    "ft:it-control-weakness"
+   ],
+   "narrower": [],
+   "related": [
+    "ft:inaccurate-financial-reporting",
+    "concept:gitc"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Information and Communication - quality information (Principle 13)",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-13-use-quality-information/",
+     "precision": "principle",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:documentation-deficiency",
+   "scheme": "findings_typology",
+   "prefLabel": "Inadequate or Missing Documentation",
+   "altLabels": [
+    "inadequate documentation",
+    "insufficient documentation",
+    "missing documentation",
+    "lack of supporting documentation",
+    "incomplete records",
+    "no supporting documentation"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:findings"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Information and Communication (Principles 13-15); GAGAS documentation standards",
+     "uri": "https://www.gao.gov/greenbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:eligibility-error",
+   "scheme": "findings_typology",
+   "prefLabel": "Eligibility Determination Error",
+   "altLabels": [
+    "eligibility error",
+    "improper eligibility determination",
+    "ineligible recipient",
+    "eligibility not verified",
+    "benefit eligibility"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:grant-compliance"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "OMB-A-123-C",
+     "label": "OMB M-21-19: Appendix C to OMB Circular A-123, Requirements for Payment Integrity Improvement",
+     "uri": "https://www.whitehouse.gov/wp-content/uploads/2021/03/M-21-19.pdf",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "ft:fraud-misappropriation",
+   "scheme": "findings_typology",
+   "prefLabel": "Fraud, Theft, or Misappropriation",
+   "altLabels": [
+    "fraud",
+    "theft",
+    "misappropriation",
+    "embezzlement",
+    "misuse of funds",
+    "ghost employee",
+    "falsified records"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:fraud",
+    "concept:procurement-fraud"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Principle 8 — Assess Fraud, Improper Payment, and Information Security Risk (GAO-25-107721)",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-8-assess-fraud-improper-payment-and-information-security-risk/",
+     "precision": "principle",
+     "verified": "2026-10-30"
+    },
+    {
+     "type": "closeMatch",
+     "scheme": "ACFE",
+     "label": "The Fraud Tree Explained: Classifying Occupational Fraud Risks (ACFE)",
+     "uri": "https://www.acfe.com/acfe-insights-blog/blog-detail?s=fraud-tree-explained",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "ft:improper-payments",
+   "scheme": "findings_typology",
+   "prefLabel": "Improper or Unsupported Payments",
+   "altLabels": [
+    "improper payment",
+    "unsupported payment",
+    "erroneous payment",
+    "duplicate payment",
+    "questionable expenditure",
+    "overpayment"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:single-audit"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "PIIA",
+     "label": "Payment Integrity Information Act of 2019 (Public Law 116-117)",
+     "uri": "https://www.congress.gov/116/plaws/publ117/PLAW-116publ117.pdf",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    },
+    {
+     "type": "relatedMatch",
+     "scheme": "OMB-A-123-C",
+     "label": "OMB M-21-19: Appendix C to OMB Circular A-123, Requirements for Payment Integrity Improvement",
+     "uri": "https://www.whitehouse.gov/wp-content/uploads/2021/03/M-21-19.pdf",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "ft:inaccurate-financial-reporting",
+   "scheme": "findings_typology",
+   "prefLabel": "Inaccurate or Misstated Financial Reporting",
+   "altLabels": [
+    "misstatement",
+    "financial statement error",
+    "inaccurate reporting",
+    "accounting error",
+    "reporting error"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:financial-audit",
+    "concept:single-audit"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Principle 15 — Communicate/Report reliable information externally",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-15-communicate-externally/",
+     "precision": "principle",
+     "verified": "2026-07-27"
+    },
+    {
+     "type": "closeMatch",
+     "scheme": "AICPA-GAAS",
+     "label": "AU-C 450 — Misstatements in financial statements",
+     "uri": "https://www.aicpa-cima.com/resources/download/aicpa-statements-on-auditing-standards-currently-effective",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:inadequate-policies-procedures",
+   "scheme": "findings_typology",
+   "prefLabel": "Inadequate or Outdated Policies and Procedures",
+   "altLabels": [
+    "lack of written policies",
+    "inadequate procedures",
+    "outdated policies",
+    "no standard operating procedures",
+    "missing procedures"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:governance"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Principle 12 — Document policies and procedures in the internal control system",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-12-implement-control-activities/",
+     "precision": "principle",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:internal-control-weakness",
+   "scheme": "findings_typology",
+   "prefLabel": "Internal Control Weakness",
+   "altLabels": [
+    "control deficiency",
+    "weak controls",
+    "lack of controls",
+    "significant deficiency"
+   ],
+   "broader": [],
+   "narrower": [
+    "ft:it-control-weakness",
+    "ft:reconciliation-deficiency",
+    "ft:segregation-of-duties"
+   ],
+   "related": [
+    "concept:internal-controls",
+    "concept:material-weakness"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Standards for Internal Control in the Federal Government (GAO-25-107721)",
+     "uri": "https://www.gao.gov/greenbook",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "ft:it-control-weakness",
+   "scheme": "findings_typology",
+   "prefLabel": "IT / System Control Weakness",
+   "altLabels": [
+    "IT control weakness",
+    "system access control",
+    "password control",
+    "cybersecurity weakness",
+    "logical access",
+    "information technology control"
+   ],
+   "broader": [
+    "ft:internal-control-weakness"
+   ],
+   "narrower": [
+    "ft:access-management-deficiency",
+    "ft:data-integrity-issue"
+   ],
+   "related": [
+    "concept:gitc"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "NIST-SP-800-53",
+     "label": "SP 800-53 Rev. 5: Security and Privacy Controls for Information Systems and Organizations",
+     "uri": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+     "precision": "scheme",
+     "verified": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "id": "ft:lack-of-oversight",
+   "scheme": "findings_typology",
+   "prefLabel": "Lack of Oversight or Monitoring",
+   "altLabels": [
+    "lack of oversight",
+    "inadequate monitoring",
+    "insufficient supervision",
+    "absence of oversight",
+    "weak monitoring"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:oversight-activity",
+    "concept:program-effectiveness"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Monitoring component (Principles 16-17)",
+     "uri": "https://www.gao.gov/greenbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:noncompliance",
+   "scheme": "findings_typology",
+   "prefLabel": "Noncompliance with Law, Regulation, or Policy",
+   "altLabels": [
+    "noncompliance",
+    "did not comply",
+    "failed to comply",
+    "violation of policy",
+    "not in compliance",
+    "regulatory violation"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:compliance-audit",
+    "criteria:law"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "GAGAS",
+     "label": "Government Auditing Standards — Compliance findings",
+     "uri": "https://www.gao.gov/yellowbook",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    },
+    {
+     "type": "relatedMatch",
+     "scheme": "OMB-Uniform-Guidance",
+     "label": "2 CFR 200 Subpart F — Compliance requirements / questioned costs",
+     "uri": "https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-F",
+     "precision": "section",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:procurement-noncompliance",
+   "scheme": "findings_typology",
+   "prefLabel": "Procurement / Contracting Noncompliance",
+   "altLabels": [
+    "procurement noncompliance",
+    "sole source violation",
+    "contract requirement not met",
+    "improper contract",
+    "procurement violation"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:procurement",
+    "concept:contract-admin"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "ft:reconciliation-deficiency",
+   "scheme": "findings_typology",
+   "prefLabel": "Account Reconciliation Deficiency",
+   "altLabels": [
+    "unreconciled accounts",
+    "reconciliation deficiency",
+    "untimely reconciliation",
+    "bank reconciliation failure",
+    "subledger to GL mismatch"
+   ],
+   "broader": [
+    "ft:internal-control-weakness"
+   ],
+   "narrower": [],
+   "related": [
+    "ft:inaccurate-financial-reporting",
+    "concept:internal-controls"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "COSO",
+     "label": "Control Activities - reconciliations (Principles 10-12)",
+     "uri": "https://www.coso.org/guidance-on-ic",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:segregation-of-duties",
+   "scheme": "findings_typology",
+   "prefLabel": "Inadequate Segregation of Duties",
+   "altLabels": [
+    "segregation of duties",
+    "separation of duties",
+    "incompatible duties",
+    "lack of segregation"
+   ],
+   "broader": [
+    "ft:internal-control-weakness"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:internal-controls"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "COSO",
+     "label": "Control Activities — Segregation of Duties (Principle 10)",
+     "uri": "https://www.coso.org/guidance-on-ic",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "ft:untimely-processing",
+   "scheme": "findings_typology",
+   "prefLabel": "Untimely Processing or Delays",
+   "altLabels": [
+    "untimely",
+    "not timely",
+    "delays",
+    "past due",
+    "overdue",
+    "backlog",
+    "late submission"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [
+    "concept:recommendation-followup"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "relatedMatch",
+     "scheme": "GAO-Green-Book",
+     "label": "Principle 10 — Design control activities (timeliness of processing)",
+     "uri": "https://guides.gaoinnovations.gov/greenbook/2025/principle-10-design-control-activities/",
+     "precision": "principle",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "cluster:cross-cutting",
+   "scheme": "program_areas",
+   "prefLabel": "Cross-Cutting",
+   "altLabels": [
+    "Cross-Cutting / Government-Wide",
+    "government-wide",
+    "cross-agency",
+    "all agencies"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:cafr",
+    "concept:financial-management",
+    "concept:it-cybersecurity",
+    "concept:overtime",
+    "concept:pension",
+    "concept:personnel-hr",
+    "concept:tax-admin",
+    "concept:workers-comp"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:economic-development",
+   "scheme": "program_areas",
+   "prefLabel": "Economic Development & Regulation",
+   "altLabels": [
+    "economic development",
+    "business development",
+    "regulation",
+    "housing"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:affordable-housing",
+    "concept:cdbg",
+    "concept:consumer-protection",
+    "concept:economic-development-incentives",
+    "concept:labor-employment",
+    "concept:lottery-gaming-regulation",
+    "concept:small-business-enterprise"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:education",
+   "scheme": "program_areas",
+   "prefLabel": "Education",
+   "altLabels": [
+    "Public Education",
+    "schools"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:early-childhood",
+    "concept:educator-certification",
+    "concept:enrollment-verification",
+    "concept:special-education",
+    "concept:student-nutrition",
+    "concept:title1"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:finance",
+   "scheme": "program_areas",
+   "prefLabel": "Finance & Revenue",
+   "altLabels": [
+    "fiscal",
+    "budget",
+    "finance",
+    "revenue"
+   ],
+   "broader": [],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:health",
+   "scheme": "program_areas",
+   "prefLabel": "Health",
+   "altLabels": [
+    "healthcare",
+    "health services",
+    "health care"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:co-occurring",
+    "concept:lead-poisoning",
+    "concept:medicaid",
+    "concept:mental-health",
+    "concept:public-health",
+    "concept:substance-use"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:human-services",
+   "scheme": "program_areas",
+   "prefLabel": "Human Services",
+   "altLabels": [
+    "social services",
+    "social support",
+    "welfare services"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:benefit-overpayment",
+    "concept:child-welfare",
+    "concept:dd-waiver",
+    "concept:developmental-disabilities",
+    "concept:homelessness",
+    "concept:ltss",
+    "concept:older-adults",
+    "concept:paid-family-leave",
+    "concept:poverty-reduction",
+    "concept:public-benefits-eligibility",
+    "concept:snap",
+    "concept:tanf"
+   ],
+   "related": [],
+   "scopeNote": "Services delivered to residents: income support, child welfare, disability services, aging, homelessness and similar programs. Not human resources: a government's own staffing and personnel work is under Personnel & HR (concept:personnel-hr), in the cross-cutting cluster.",
+   "mappings": []
+  },
+  {
+   "id": "cluster:infrastructure",
+   "scheme": "program_areas",
+   "prefLabel": "Operations & Infrastructure",
+   "altLabels": [
+    "infrastructure",
+    "transportation",
+    "public works",
+    "environment"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:air-quality",
+    "concept:capital-projects",
+    "concept:environmental-justice",
+    "concept:fleet-management",
+    "concept:highway-trust-fund",
+    "concept:permit-inspection",
+    "concept:real-property-management",
+    "concept:traffic-safety",
+    "concept:water-quality"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:oversight",
+   "scheme": "program_areas",
+   "prefLabel": "Oversight Bodies",
+   "altLabels": [
+    "oversight",
+    "accountability",
+    "watchdog"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:anti-corruption",
+    "concept:audit",
+    "concept:causal-mapping",
+    "concept:checks-and-balances",
+    "concept:civil-society-oversight",
+    "concept:enterprise-risk-management",
+    "concept:ethics-enforcement",
+    "concept:evidence-based-policymaking",
+    "concept:fraud",
+    "concept:fraud-analytics",
+    "concept:governance",
+    "concept:government-capacity",
+    "concept:grant-compliance",
+    "concept:implementation-science",
+    "concept:internal-controls",
+    "concept:monitoring-evaluation",
+    "concept:oversight-activity",
+    "concept:oversight-independence",
+    "concept:procurement",
+    "concept:program-effectiveness",
+    "concept:public-inquiry",
+    "concept:rulemaking",
+    "concept:supreme-audit-institution",
+    "concept:three-horizons",
+    "concept:whistleblowing"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "cluster:public-safety",
+   "scheme": "program_areas",
+   "prefLabel": "Public Safety & Justice",
+   "altLabels": [
+    "criminal justice",
+    "public safety",
+    "justice system"
+   ],
+   "broader": [],
+   "narrower": [
+    "concept:detention",
+    "concept:emergency-dispatch",
+    "concept:ems-response",
+    "concept:juvenile-justice",
+    "concept:law-enforcement",
+    "concept:reentry"
+   ],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:affordable-housing",
+   "scheme": "program_areas",
+   "prefLabel": "Affordable Housing",
+   "altLabels": [
+    "affordable housing production",
+    "housing development",
+    "public housing",
+    "low-income housing"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:cdbg",
+    "concept:homelessness"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:air-quality",
+   "scheme": "program_areas",
+   "prefLabel": "Air Quality",
+   "altLabels": [
+    "air pollution",
+    "ambient air quality"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:benefit-overpayment",
+   "scheme": "program_areas",
+   "prefLabel": "Benefit Overpayment & Improper Payments",
+   "altLabels": [
+    "overpayment",
+    "improper payment",
+    "benefit issuance error",
+    "payment recovery",
+    "overpayment recovery"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:public-benefits-eligibility",
+    "ft:improper-payments",
+    "ft:eligibility-error"
+   ],
+   "scopeNote": "Improper or excess benefit payments and their recovery across assistance programs. This is the program area; the finding type is ft:improper-payments.",
+   "mappings": []
+  },
+  {
+   "id": "concept:cafr",
+   "scheme": "program_areas",
+   "prefLabel": "Annual Comprehensive Financial Report",
+   "altLabels": [
+    "CAFR",
+    "annual financial report",
+    "financial statements",
+    "government financial report",
+    "ACFR"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:financial-management",
+    "concept:financial-audit"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:capital-projects",
+   "scheme": "program_areas",
+   "prefLabel": "Capital Projects",
+   "altLabels": [
+    "capital improvements",
+    "capital construction",
+    "capital program"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:cdbg",
+   "scheme": "program_areas",
+   "prefLabel": "Community Development Block Grant",
+   "altLabels": [
+    "CDBG",
+    "block grant",
+    "HUD grant",
+    "community development funding"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:affordable-housing",
+    "concept:grant-compliance"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "Community Development Block Grants/Entitlement Grants",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=14.218",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:child-welfare",
+   "scheme": "program_areas",
+   "prefLabel": "Child Welfare",
+   "altLabels": [
+    "child protection",
+    "child safety",
+    "child abuse",
+    "neglect investigation",
+    "child protective services",
+    "CPS investigation"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:co-occurring",
+   "scheme": "program_areas",
+   "prefLabel": "Co-Occurring Disorders",
+   "altLabels": [
+    "dual diagnosis",
+    "co-occurring mental health",
+    "co-occurring substance use",
+    "COD",
+    "integrated treatment"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:mental-health",
+    "concept:substance-use"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:consumer-protection",
+   "scheme": "program_areas",
+   "prefLabel": "Consumer Protection",
+   "altLabels": [
+    "consumer affairs",
+    "consumer rights"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:dd-waiver",
+   "scheme": "program_areas",
+   "prefLabel": "Developmental Disabilities (DD) Medicaid Waiver",
+   "altLabels": [
+    "DD waiver",
+    "ID/DD waiver",
+    "waiver program",
+    "HCBS",
+    "home community based services waiver",
+    "DD waiver waiting list",
+    "DD Medicaid Waiver",
+    "developmental disabilities waiver"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:developmental-disabilities"
+   ],
+   "scopeNote": "DD stands for developmental disabilities. A Medicaid home and community-based services (HCBS) waiver that pays for services for people with intellectual and developmental disabilities in their homes and communities rather than in an institution.",
+   "mappings": []
+  },
+  {
+   "id": "concept:detention",
+   "scheme": "program_areas",
+   "prefLabel": "Correctional Facility Operations",
+   "altLabels": [
+    "detention",
+    "incarceration",
+    "jail operations",
+    "corrections operations"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:reentry"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:developmental-disabilities",
+   "scheme": "program_areas",
+   "prefLabel": "Developmental Disabilities",
+   "altLabels": [
+    "DD",
+    "developmental disability",
+    "intellectual disability",
+    "HCBS waiver",
+    "home and community based services"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:dd-waiver",
+    "concept:ltss"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:early-childhood",
+   "scheme": "program_areas",
+   "prefLabel": "Early Childhood Education",
+   "altLabels": [
+    "ECE",
+    "early education",
+    "pre-K",
+    "Head Start",
+    "daycare",
+    "childcare",
+    "early learning"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:special-education"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:economic-development-incentives",
+   "scheme": "program_areas",
+   "prefLabel": "Economic Development Incentives and Tax Abatements",
+   "altLabels": [
+    "tax abatement",
+    "tax increment financing",
+    "TIF",
+    "economic development incentive",
+    "PILOT agreement",
+    "tax exemption",
+    "development subsidy",
+    "incentive agreement",
+    "clawback"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:tax-admin",
+    "concept:program-effectiveness",
+    "concept:affordable-housing"
+   ],
+   "scopeNote": "Foregone-revenue tools used to induce development (tax abatements, exemptions, tax increment financing, payment-in-lieu-of-taxes agreements) and monitoring of whether recipients meet their commitments. Match the acronym TIF whole-word and case-sensitive.",
+   "mappings": []
+  },
+  {
+   "id": "concept:educator-certification",
+   "scheme": "program_areas",
+   "prefLabel": "Educator Licensure & Certification",
+   "altLabels": [
+    "teacher certification",
+    "educator licensure",
+    "teacher licensure",
+    "educator credentialing",
+    "certification of teachers"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "Licensing and certification of teachers and other education personnel.",
+   "mappings": []
+  },
+  {
+   "id": "concept:emergency-dispatch",
+   "scheme": "program_areas",
+   "prefLabel": "911 and Emergency Dispatch Operations",
+   "altLabels": [
+    "911 operations",
+    "911 call processing",
+    "call-taking",
+    "call processing",
+    "emergency dispatch",
+    "computer-aided dispatch",
+    "CAD",
+    "dispatch operations",
+    "call intake",
+    "emergency communications"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:ems-response",
+    "concept:law-enforcement"
+   ],
+   "scopeNote": "911 call intake and emergency dispatch operations: staffing, answer and dispatch times, and call-processing accuracy.",
+   "mappings": []
+  },
+  {
+   "id": "concept:ems-response",
+   "scheme": "program_areas",
+   "prefLabel": "Emergency Medical Services",
+   "altLabels": [
+    "EMS",
+    "ambulance response",
+    "EMS response time",
+    "paramedic",
+    "emergency response",
+    "first responder"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:enrollment-verification",
+   "scheme": "program_areas",
+   "prefLabel": "Student Enrollment Verification",
+   "altLabels": [
+    "enrollment verification",
+    "enrollment audit",
+    "attendance verification"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:title1"
+   ],
+   "scopeNote": "Verification that enrolled students are eligible to attend, and that the enrollment and attendance counts that drive school funding are accurate.",
+   "mappings": []
+  },
+  {
+   "id": "concept:environmental-justice",
+   "scheme": "program_areas",
+   "prefLabel": "Environmental Justice",
+   "altLabels": [
+    "environmental equity",
+    "EJ",
+    "environmental health equity",
+    "green building",
+    "sustainability"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:air-quality",
+    "concept:water-quality"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:financial-management",
+   "scheme": "program_areas",
+   "prefLabel": "Financial Management",
+   "altLabels": [
+    "fiscal management",
+    "budget management",
+    "financial controls",
+    "financial oversight",
+    "budgetary controls",
+    "accounting"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:internal-controls",
+    "concept:cafr",
+    "concept:procurement"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:fleet-management",
+   "scheme": "program_areas",
+   "prefLabel": "Fleet and Vehicle Management",
+   "altLabels": [
+    "fleet management",
+    "vehicle management",
+    "take-home vehicle",
+    "fuel card",
+    "motor pool",
+    "vehicle utilization",
+    "fleet maintenance"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [
+    "ft:asset-inventory-control",
+    "concept:overtime"
+   ],
+   "scopeNote": "Acquisition, assignment, fuel-card control, maintenance and disposal of government vehicles.",
+   "mappings": []
+  },
+  {
+   "id": "concept:highway-trust-fund",
+   "scheme": "program_areas",
+   "prefLabel": "Highway Trust Fund",
+   "altLabels": [
+    "HTF",
+    "federal highway funds",
+    "FHWA funds",
+    "transportation funding",
+    "road funding"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:homelessness",
+   "scheme": "program_areas",
+   "prefLabel": "Homelessness Services",
+   "altLabels": [
+    "homeless services",
+    "shelter system",
+    "housing instability",
+    "unhoused",
+    "emergency shelter",
+    "rapid rehousing",
+    "transitional housing"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:affordable-housing"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "Continuum of Care Program (HUD)",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=14.267",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:it-cybersecurity",
+   "scheme": "program_areas",
+   "prefLabel": "Information Technology / Cybersecurity",
+   "altLabels": [
+    "IT",
+    "cybersecurity",
+    "information security",
+    "data security",
+    "cyber",
+    "infosec",
+    "network security",
+    "IT systems"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:gitc"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "NIST-CSF",
+     "label": "NIST Cybersecurity Framework 2.0",
+     "uri": "https://www.nist.gov/cyberframework",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    },
+    {
+     "type": "relatedMatch",
+     "scheme": "NIST-SP-800-53",
+     "label": "Security and Privacy Controls for Information Systems",
+     "uri": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+     "precision": "scheme",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:juvenile-justice",
+   "scheme": "program_areas",
+   "prefLabel": "Juvenile Justice",
+   "altLabels": [
+    "youth detention",
+    "juvenile detention",
+    "youth rehabilitation",
+    "juvenile offenders",
+    "youth justice",
+    "juvenile delinquency"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:labor-employment",
+   "scheme": "program_areas",
+   "prefLabel": "Labor and Employment Programs",
+   "altLabels": [
+    "employment services",
+    "labor programs",
+    "employment programs",
+    "labor administration",
+    "employment and training"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:workers-comp",
+    "concept:paid-family-leave",
+    "concept:personnel-hr"
+   ],
+   "scopeNote": "Labor-market programs: job training and workforce services, unemployment insurance, and related wage and benefit administration. Distinct from Personnel & HR, which covers government as an employer.",
+   "mappings": []
+  },
+  {
+   "id": "concept:law-enforcement",
+   "scheme": "program_areas",
+   "prefLabel": "Law Enforcement",
+   "altLabels": [
+    "policing",
+    "police operations",
+    "law enforcement operations",
+    "evidence-based policing",
+    "community policing"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:lead-poisoning",
+   "scheme": "program_areas",
+   "prefLabel": "Lead Poisoning Prevention",
+   "altLabels": [
+    "lead paint",
+    "lead exposure",
+    "childhood lead",
+    "lead contamination",
+    "blood lead level"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:public-health",
+    "concept:water-quality"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "Childhood Lead Poisoning Prevention (CDC)",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=93.197",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:lottery-gaming-regulation",
+   "scheme": "program_areas",
+   "prefLabel": "Lottery and Gaming Regulation",
+   "altLabels": [
+    "lottery",
+    "charitable games",
+    "gaming",
+    "sports wagering",
+    "gaming licensee",
+    "lottery retailer"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:financial-audit",
+    "concept:internal-controls",
+    "concept:cafr"
+   ],
+   "scopeNote": "Operation and regulation of a government lottery, charitable games and sports wagering.",
+   "mappings": []
+  },
+  {
+   "id": "concept:ltss",
+   "scheme": "program_areas",
+   "prefLabel": "Long-Term Services and Supports",
+   "altLabels": [
+    "LTSS",
+    "long-term care",
+    "home care",
+    "personal care services",
+    "community living supports"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:developmental-disabilities",
+    "concept:older-adults"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:medicaid",
+   "scheme": "program_areas",
+   "prefLabel": "Medicaid",
+   "altLabels": [
+    "Medicaid program",
+    "health benefits",
+    "Medicaid eligibility",
+    "Medicaid enrollment"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:mental-health",
+   "scheme": "program_areas",
+   "prefLabel": "Mental Health Services",
+   "altLabels": [
+    "behavioral health",
+    "mental health treatment",
+    "psychiatric services",
+    "community mental health",
+    "mental health care"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:substance-use",
+    "concept:co-occurring"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:older-adults",
+   "scheme": "program_areas",
+   "prefLabel": "Older Adults Services",
+   "altLabels": [
+    "senior services",
+    "aging services",
+    "older Americans",
+    "elder care",
+    "OAA",
+    "Older Americans Act"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:ltss"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:overtime",
+   "scheme": "program_areas",
+   "prefLabel": "Overtime",
+   "altLabels": [
+    "overtime pay",
+    "overtime usage",
+    "overtime management",
+    "overtime costs",
+    "time and attendance"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:personnel-hr"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:paid-family-leave",
+   "scheme": "program_areas",
+   "prefLabel": "Paid Family Leave (PFL)",
+   "altLabels": [
+    "PFL",
+    "paid family leave",
+    "paid leave program",
+    "family and medical leave benefits"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:personnel-hr"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:pension",
+   "scheme": "program_areas",
+   "prefLabel": "Pension / Retirement Benefits",
+   "altLabels": [
+    "pension",
+    "retirement fund",
+    "retirement benefits",
+    "police pension",
+    "teacher pension",
+    "OPEB",
+    "post-employment benefits"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:permit-inspection",
+   "scheme": "program_areas",
+   "prefLabel": "Permitting and Building Inspection",
+   "altLabels": [
+    "permitting",
+    "building permit",
+    "construction permit",
+    "building inspection",
+    "code enforcement",
+    "certificate of occupancy",
+    "permit processing",
+    "housing code inspection"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:consumer-protection"
+   ],
+   "scopeNote": "Issuing construction and occupancy permits, and the inspection and code-enforcement work that follows. Business licensing is a separate area.",
+   "mappings": []
+  },
+  {
+   "id": "concept:personnel-hr",
+   "scheme": "program_areas",
+   "prefLabel": "Personnel & HR",
+   "altLabels": [
+    "human resources",
+    "personnel management",
+    "HR"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "A government's own workforce: hiring, classification, pay, discipline and personnel records. Internal operations, not the human services delivered to residents (cluster:human-services).",
+   "mappings": []
+  },
+  {
+   "id": "concept:poverty-reduction",
+   "scheme": "program_areas",
+   "prefLabel": "Poverty Reduction",
+   "altLabels": [
+    "anti-poverty",
+    "poverty alleviation"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:public-benefits-eligibility",
+   "scheme": "program_areas",
+   "prefLabel": "Public Benefits Eligibility Determination",
+   "altLabels": [
+    "eligibility determination",
+    "eligibility verification",
+    "benefit eligibility",
+    "recertification",
+    "redetermination"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:snap",
+    "concept:tanf",
+    "ft:eligibility-error",
+    "concept:self-attestation"
+   ],
+   "scopeNote": "Determination and verification of applicant eligibility for public assistance benefits (SNAP, TANF and similar), across programs.",
+   "mappings": []
+  },
+  {
+   "id": "concept:public-health",
+   "scheme": "program_areas",
+   "prefLabel": "Public Health",
+   "altLabels": [
+    "population health",
+    "community health",
+    "public health infrastructure",
+    "health department",
+    "disease prevention",
+    "health promotion"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:lead-poisoning"
+   ],
+   "scopeNote": "Population-level health programs: disease prevention and surveillance, health promotion, environmental health and the health department's regulatory work. Individual treatment programs, such as mental health or substance use, have their own areas.",
+   "mappings": []
+  },
+  {
+   "id": "concept:real-property-management",
+   "scheme": "program_areas",
+   "prefLabel": "Real Property & Facilities Management",
+   "altLabels": [
+    "real property",
+    "facilities management",
+    "building maintenance",
+    "real estate management",
+    "property management"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "Management and maintenance of government-owned real property and facilities.",
+   "mappings": []
+  },
+  {
+   "id": "concept:reentry",
+   "scheme": "program_areas",
+   "prefLabel": "Reentry Services",
+   "altLabels": [
+    "reentry",
+    "returning citizens",
+    "ex-offender services",
+    "criminal justice reentry",
+    "post-incarceration services"
+   ],
+   "broader": [
+    "cluster:public-safety"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:detention"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:small-business-enterprise",
+   "scheme": "program_areas",
+   "prefLabel": "Small and Minority Business Enterprise Programs",
+   "altLabels": [
+    "local business preference",
+    "small business set-aside",
+    "minority business enterprise",
+    "MBE"
+   ],
+   "broader": [
+    "cluster:economic-development"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:procurement"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:snap",
+   "scheme": "program_areas",
+   "prefLabel": "SNAP / Food Assistance",
+   "altLabels": [
+    "SNAP",
+    "food stamps",
+    "food assistance",
+    "EBT",
+    "electronic benefits transfer",
+    "nutrition assistance"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:tanf",
+    "concept:poverty-reduction"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "Supplemental Nutrition Assistance Program (SNAP)",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=10.551",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:special-education",
+   "scheme": "program_areas",
+   "prefLabel": "Special Education",
+   "altLabels": [
+    "SPED",
+    "special ed",
+    "IEP",
+    "individualized education program",
+    "disability education",
+    "IDEA",
+    "students with disabilities"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:early-childhood"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:student-nutrition",
+   "scheme": "program_areas",
+   "prefLabel": "School Nutrition & Meal Programs",
+   "altLabels": [
+    "school nutrition",
+    "school meals",
+    "national school lunch program",
+    "school breakfast program",
+    "NSLP",
+    "free and reduced-price meals",
+    "child nutrition"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:snap"
+   ],
+   "scopeNote": "Federally funded school meal programs (National School Lunch and School Breakfast), including meal-count claiming, eligibility and reimbursement.",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "National School Lunch Program (USDA/FNS)",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=10.555",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:substance-use",
+   "scheme": "program_areas",
+   "prefLabel": "Substance Use Disorder Treatment",
+   "altLabels": [
+    "SUD",
+    "substance abuse",
+    "addiction treatment",
+    "drug treatment",
+    "alcohol treatment",
+    "recovery services"
+   ],
+   "broader": [
+    "cluster:health"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:mental-health",
+    "concept:co-occurring"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:tanf",
+   "scheme": "program_areas",
+   "prefLabel": "Temporary Assistance for Needy Families",
+   "altLabels": [
+    "TANF",
+    "cash assistance",
+    "welfare",
+    "public assistance",
+    "TANF program"
+   ],
+   "broader": [
+    "cluster:human-services"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:snap",
+    "concept:poverty-reduction"
+   ],
+   "scopeNote": "",
+   "mappings": [
+    {
+     "type": "closeMatch",
+     "scheme": "Federal-Assistance-Listing",
+     "label": "Temporary Assistance for Needy Families (TANF)",
+     "uri": "https://sam.gov/search/?index=cfda&keywords=93.558",
+     "precision": "search",
+     "verified": "2026-07-27"
+    }
+   ]
+  },
+  {
+   "id": "concept:tax-admin",
+   "scheme": "program_areas",
+   "prefLabel": "Tax Administration",
+   "altLabels": [
+    "tax collection",
+    "revenue collection",
+    "tax compliance",
+    "tax enforcement",
+    "property tax"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:financial-management",
+    "concept:economic-development-incentives"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:title1",
+   "scheme": "program_areas",
+   "prefLabel": "Title I Supplemental Programs",
+   "altLabels": [
+    "Title I",
+    "Title 1",
+    "supplemental education",
+    "federal education funding",
+    "at-risk students"
+   ],
+   "broader": [
+    "cluster:education"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:traffic-safety",
+   "scheme": "program_areas",
+   "prefLabel": "Traffic Safety",
+   "altLabels": [
+    "road safety",
+    "Vision Zero",
+    "pedestrian safety"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:water-quality",
+   "scheme": "program_areas",
+   "prefLabel": "Water Quality",
+   "altLabels": [
+    "drinking water quality",
+    "water safety"
+   ],
+   "broader": [
+    "cluster:infrastructure"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:lead-poisoning"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  },
+  {
+   "id": "concept:workers-comp",
+   "scheme": "program_areas",
+   "prefLabel": "Workers' Compensation",
+   "altLabels": [
+    "workers comp",
+    "workers' comp",
+    "workplace injury",
+    "occupational injury",
+    "disability compensation"
+   ],
+   "broader": [
+    "cluster:cross-cutting"
+   ],
+   "narrower": [],
+   "related": [
+    "concept:personnel-hr"
+   ],
+   "scopeNote": "",
+   "mappings": []
+  }
+ ]
+}

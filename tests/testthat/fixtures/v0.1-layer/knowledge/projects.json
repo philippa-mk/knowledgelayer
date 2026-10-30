@@ -1,0 +1,44 @@
+{
+  "schema": "kl-projects/1",
+  "projects": [
+    {
+      "id": "intake-2025",
+      "title": "Complaint intake analysis 2025",
+      "owner": "Analyst A",
+      "people": [
+        "Analyst A"
+      ],
+      "status": "active",
+      "sources": [
+        "Complaint intake records"
+      ],
+      "methods": [
+        "Deduplication script"
+      ],
+      "outputs": [],
+      "location": "",
+      "notes": "",
+      "updated": "2026-10-30T14:09:39Z",
+      "registered": "2026-10-30T14:09:39Z"
+    },
+    {
+      "id": "contracts-2026",
+      "title": "Contract spending review",
+      "owner": "Analyst B",
+      "people": [
+        "Analyst B",
+        "Analyst C"
+      ],
+      "status": "active",
+      "sources": [
+        "Vendor payments extract"
+      ],
+      "methods": [],
+      "outputs": [],
+      "location": "",
+      "notes": "",
+      "updated": "2026-10-30T14:09:39Z",
+      "registered": "2026-10-30T14:09:39Z"
+    }
+  ]
+}

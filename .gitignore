@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rcheck/
+__pycache__/
+/private/
+/review/

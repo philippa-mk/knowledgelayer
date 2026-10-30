@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__KL_TITLE__</title>
+<style>
+:root {
+  --bg: #f7f7f5; --surface: #ffffff; --ink: #1b1d21; --muted: #4a4f57;
+  --line: #c9ccd1; --accent: #1f4e79; --accent-ink: #ffffff;
+  --high: #9b1c1c; --med: #7a5200; --low: #3d5a3d; --focus: #1f4e79;
+  --changed: #fff4d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a; --surface: #1e2125; --ink: #eceef1; --muted: #b4b9c1;
+    --line: #444a52; --accent: #8ab8e6; --accent-ink: #0d1520;
+    --high: #f09595; --med: #e6c069; --low: #9fcf9f; --focus: #8ab8e6;
+    --changed: #3a3320;
+  }
+}
+@media (prefers-contrast: more) { :root { --line: var(--ink); --muted: var(--ink); } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: var(--accent-ink);
+  padding: .6rem 1rem; z-index: 10; }
+.skip:focus { left: 1rem; top: 1rem; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+header, main, footer { max-width: 52rem; margin: 0 auto; padding: 0 16px; }
+header { padding-top: 2rem; }
+h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+h2.section { font-size: 1.1rem; margin-top: 0; }
+.meta { color: var(--muted); font-size: .9rem; margin: 0 0 1rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 1rem 1.25rem; margin: 1rem 0; }
+.panel ol { padding-left: 1.25rem; margin: .5rem 0; }
+.verdict-key { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; margin: 0; }
+.verdict-key dt { font-weight: 700; }
+.verdict-key dd { margin: 0; color: var(--muted); }
+article { background: var(--surface); border: 1px solid var(--line); border-left-width: 6px;
+  border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+article.sev-high { border-left-color: var(--high); }
+article.sev-med { border-left-color: var(--med); }
+article.sev-low { border-left-color: var(--low); }
+article.changed { background: var(--changed); }
+article h2 { font-size: 1.1rem; margin: 0 0 .5rem; }
+.sev { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  border: 1px solid currentColor; border-radius: 4px; padding: 0 .4rem; margin-right: .5rem; }
+.sev-high .sev { color: var(--high); } .sev-med .sev { color: var(--med); } .sev-low .sev { color: var(--low); }
+.label { font-weight: 700; display: block; margin-top: .75rem; }
+.fix { margin: .25rem 0 0; }
+.src { color: var(--muted); font-size: .9rem; margin: .5rem 0 0; }
+.xwalk { margin: .25rem 0 0; padding-left: 1.25rem; font-size: .95rem; }
+.xwalk a { color: var(--accent); text-underline-offset: 2px; }
+fieldset { border: 0; padding: 0; margin: .75rem 0 0; }
+legend { font-weight: 700; padding: 0; }
+.choices { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+.choices label { display: inline-flex; align-items: center; gap: .35rem; border: 1px solid var(--line);
+  border-radius: 6px; padding: .3rem .6rem; cursor: pointer; min-height: 44px; }
+.choices input { width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--accent); }
+.proposed { font-size: .75rem; color: var(--muted); }
+textarea, input[type=text] { width: 100%; font: inherit; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: .5rem; }
+textarea { min-height: 3.5rem; resize: vertical; }
+.hint { color: var(--muted); font-size: .9rem; margin: .25rem 0 0; }
+.buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; }
+button { font: inherit; font-weight: 700; background: var(--accent); color: var(--accent-ink);
+  border: 2px solid var(--accent); border-radius: 6px; padding: .6rem 1.1rem; cursor: pointer; min-height: 44px; }
+button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+#status { margin-top: .75rem; font-weight: 600; }
+.returnto { font-weight: 700; }
+details { margin-top: .75rem; }
+pre { white-space: pre-wrap; word-break: break-word; font-size: .8rem; background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; padding: .75rem; max-height: 20rem; overflow: auto; }
+footer { color: var(--muted); font-size: .85rem; padding-bottom: 3rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#findings">Skip to findings</a>
+<header>
+  <h1 id="title">__KL_TITLE__</h1>
+  <p class="meta" id="meta"></p>
+</header>
+<main>
+  <section class="panel" aria-labelledby="open-h">
+    <h2 class="section" id="open-h">Before you start</h2>
+    <ol>
+      <li>If you are reading this in an email preview, save the attached file to your computer first,
+        then open the saved file in a web browser such as Edge, Chrome or Firefox.</li>
+      <li>Nothing on this page is sent anywhere. Your decisions leave it only when you export them,
+        as a file you then send on yourself.</li>
+    </ol>
+    <noscript><p><strong>This page needs JavaScript to show the findings, and it is turned off here.</strong>
+      This usually means it is open in an email preview. Save the file, then open it in a web browser.</p></noscript>
+  </section>
+
+  <section class="panel" aria-labelledby="how">
+    <h2 class="section" id="how">How this review works</h2>
+    <p id="intro" hidden></p>
+    <p>Each finding has a proposed verdict already selected. That is a recommendation, not a decision.
+      Change any you disagree with, and add a note wherever your reasoning should be on the record.
+      A TWEAK or MERGE needs a note, because the note is the instruction.</p>
+    <p>What the export records: your verdict and note on each finding, your overall note and your name,
+      when you opened the page and when you exported, and, so that a review can be told from a sign-off,
+      how long each finding was on screen and whether you changed it. Nothing else.</p>
+    <p>Your choices are saved as a draft in this browser as you go, so you can close the page and come back.
+      The draft is cleared when you export, or any time with "Clear saved draft".</p>
+    <dl class="verdict-key" id="key"></dl>
+  </section>
+
+  <section id="findings" aria-label="Findings" tabindex="-1"></section>
+
+  <section class="panel" aria-labelledby="finish">
+    <h2 class="section" id="finish">Finish the review</h2>
+    <label class="label" for="page-note">Note on the review as a whole (optional)</label>
+    <textarea id="page-note"></textarea>
+    <label class="label" for="reviewer">Your name (required)</label>
+    <input type="text" id="reviewer" autocomplete="name" aria-describedby="reviewer-hint">
+    <p class="hint" id="reviewer-hint">Recorded in the export as the person who made these decisions.</p>
+    <div class="buttons">
+      <button type="button" id="export">Export decisions</button>
+      <button type="button" id="copy" class="secondary" hidden>Copy the export as text</button>
+      <button type="button" id="clear" class="secondary">Clear saved draft</button>
+    </div>
+    <div id="status" role="status" aria-live="polite"></div>
+    <p class="returnto" id="returnto" hidden></p>
+    <details>
+      <summary>Show the export as text (if downloads are blocked)</summary>
+      <p class="hint">Copy it, paste it into a plain-text editor such as Notepad, and save it with the name shown
+        above. In Notepad, set "Save as type" to "All files", or it will be saved as .json.txt.</p>
+      <pre id="json-out" tabindex="0"></pre>
+    </details>
+  </section>
+</main>
+<footer><p>Self-contained page: it loads nothing from the internet and sends nothing anywhere.</p></footer>
+
+<script>
+const KL = /*__KL_DATA__*/null;
+(function () {
+  "use strict";
+  const iso = d => d.toISOString().replace(/\.\d{3}Z$/, "Z");
+  const localDate = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" +
+    String(d.getDate()).padStart(2, "0");
+  const storeKey = "knowledgelayer-review:" + KL.review + ":" + KL.findingsHash;
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(storeKey) || "null"); } catch (e) { return null; } },
+    set(v) { try { localStorage.setItem(storeKey, JSON.stringify(v)); } catch (e) { /* storage blocked: fine */ } },
+    clear() { try { localStorage.removeItem(storeKey); } catch (e) { /* storage blocked: fine */ } }
+  };
+  const saved = store.get() || {};
+  const openedAt = saved.openedAt || iso(new Date());
+  const state = {};
+  let exported = false, dirty = false;
+  const el = (tag, attrs, text) => {
+    const n = document.createElement(tag);
+    for (const k in (attrs || {})) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const persist = () => {
+    dirty = true;
+    const items = {};
+    for (const id in state) {
+      const s = state[id];
+      items[id] = { verdict: s.verdict, note: s.note, touched: s.touched, seenMs: s.seenMs };
+    }
+    store.set({ openedAt, items, pageNote: document.getElementById("page-note").value,
+      reviewer: document.getElementById("reviewer").value });
+  };
+
+  document.getElementById("meta").textContent =
+    KL.findings.length + " findings" + (KL.author ? " prepared by " + KL.author : "") +
+    " | review " + KL.review + " | generated " + KL.generatedAt.slice(0, 10);
+  const intro = document.getElementById("intro");
+  if (KL.intro) { intro.textContent = KL.intro; intro.hidden = false; }
+  const key = document.getElementById("key");
+  for (const v in KL.verdicts) key.append(el("dt", {}, v), el("dd", {}, KL.verdicts[v]));
+
+  const list = document.getElementById("findings");
+  KL.findings.forEach((f, idx) => {
+    const prior = (saved.items || {})[f.id] || {};
+    const s = state[f.id] = {
+      verdict: prior.verdict || f.proposed_verdict, proposed: f.proposed_verdict, note: prior.note || "",
+      severity: f.severity, target: f.target || "", finding: f.finding, proposedFix: f.proposed_fix,
+      touched: !!prior.touched, seenMs: prior.seenMs || 0, visibleSince: null
+    };
+    const art = el("article", { class: "sev-" + f.severity, "aria-labelledby": "h-" + idx, "data-id": f.id });
+    const h = el("h2", { id: "h-" + idx });
+    h.append(el("span", { class: "sev" }, f.severity), document.createTextNode(f.id + ": " + f.finding));
+    art.append(h);
+    art.append(el("span", { class: "label" }, "Proposed fix"), el("p", { class: "fix" }, f.proposed_fix));
+    if (f.source) art.append(el("p", { class: "src" }, "Source: " + f.source));
+    const t = f.typology && (KL.vocab || {})[f.typology];
+    if (t) {
+      art.append(el("span", { class: "label" }, "Kind of finding"),
+        el("p", { class: "fix" }, t.label + " (" + f.typology + ")"));
+      if (t.mappings.length) {
+        const ul = el("ul", { class: "xwalk", "aria-label": "Standards for " + f.id });
+        t.mappings.forEach(m => {
+          // Link text says how precise the link is: only an exact item,
+          // principle or section is presented as a link to the point itself.
+          const li = el("li", {}, m.scheme + ": " + m.label + " ");
+          const a = el("a", { href: m.uri, rel: "noopener noreferrer" }, "(" + m.precision_label + ")");
+          li.append(a);
+          ul.append(li);
+        });
+        art.append(ul);
+      }
+    }
+
+    const fs = el("fieldset");
+    fs.append(el("legend", {}, "Verdict for " + f.id));
+    const choices = el("div", { class: "choices" });
+    Object.keys(KL.verdicts).forEach(v => {
+      const id = "v-" + idx + "-" + v;
+      const lab = el("label", { for: id, title: KL.verdicts[v] });
+      const inp = el("input", { type: "radio", name: "v-" + idx, id: id, value: v });
+      if (v === s.verdict) inp.checked = true;
+      inp.addEventListener("change", () => {
+        s.verdict = v; s.touched = true;
+        art.classList.toggle("changed", s.verdict !== s.proposed);
+        persist();
+      });
+      lab.append(inp, document.createTextNode(v));
+      if (v === f.proposed_verdict) lab.append(el("span", { class: "proposed" }, "(proposed)"));
+      choices.append(lab);
+    });
+    fs.append(choices);
+    art.append(fs);
+    art.classList.toggle("changed", s.verdict !== s.proposed);
+
+    const nid = "n-" + idx;
+    art.append(el("label", { class: "label", for: nid }, "Note on " + f.id));
+    const ta = el("textarea", { id: nid });
+    ta.value = s.note;
+    ta.addEventListener("input", () => { s.note = ta.value; s.touched = true; persist(); });
+    art.append(ta);
+    list.append(art);
+  });
+  document.getElementById("page-note").value = saved.pageNote || "";
+  document.getElementById("reviewer").value = saved.reviewer || "";
+  document.getElementById("page-note").addEventListener("input", persist);
+  document.getElementById("reviewer").addEventListener("input", persist);
+  if (KL.returnTo) {
+    const rt = document.getElementById("returnto");
+    rt.textContent = "When you have exported, send the file to " + KL.returnTo + ".";
+    rt.hidden = false;
+  }
+
+  // Time on screen per finding. A finding counts as on screen when most of it
+  // is visible, or when it fills at least half the window (for long findings).
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => {
+      const now = performance.now();
+      entries.forEach(e => {
+        const s = state[e.target.dataset.id];
+        const visible = document.visibilityState === "visible" && e.isIntersecting &&
+          (e.intersectionRatio >= 0.6 || e.intersectionRect.height >= window.innerHeight * 0.5);
+        if (visible) s.visibleSince = s.visibleSince ?? now;
+        else if (s.visibleSince != null) { s.seenMs += now - s.visibleSince; s.visibleSince = null; }
+      });
+    }, { threshold: [0, 0.1, 0.25, 0.5, 0.6, 0.75, 1] });
+    document.querySelectorAll("article").forEach(a => io.observe(a));
+    const flush = () => {
+      const now = performance.now();
+      for (const id in state) {
+        const s = state[id];
+        if (s.visibleSince != null) { s.seenMs += now - s.visibleSince; s.visibleSince = null; }
+      }
+    };
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState !== "visible") { flush(); if (dirty) persist(); }
+    });
+  }
+  window.addEventListener("beforeunload", e => {
+    if (dirty && !exported) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  let lastText = "";
+  document.getElementById("export").addEventListener("click", () => {
+    const status = document.getElementById("status");
+    const reviewer = document.getElementById("reviewer").value.trim();
+    if (!reviewer) {
+      status.textContent = "Enter your name before exporting.";
+      document.getElementById("reviewer").focus();
+      return;
+    }
+    const missing = Object.keys(state).filter(id =>
+      ["TWEAK", "MERGE"].includes(state[id].verdict) && !state[id].note.trim());
+    if (missing.length) {
+      status.textContent = "A note is needed for " + missing.join(", ") +
+        ": a TWEAK or MERGE has nothing to act on without one.";
+      return;
+    }
+    const now = performance.now();
+    const items = {};
+    for (const id in state) {
+      const s = state[id];
+      const seen = s.seenMs + (s.visibleSince != null ? now - s.visibleSince : 0);
+      items[id] = { verdict: s.verdict, proposed: s.proposed, severity: s.severity, target: s.target,
+        finding: s.finding, proposedFix: s.proposedFix, note: s.note.trim(), touched: s.touched,
+        seenSeconds: Math.round(seen / 1000) };
+    }
+    const when = new Date();
+    const out = {
+      schema: "approved-set/1.0", loop: "review", review: KL.review,
+      author: KL.author, reviewer: reviewer, generatedAt: KL.generatedAt, openedAt: openedAt,
+      exportedAt: iso(when), findingsHash: KL.findingsHash, items: items,
+      notes: { __page: document.getElementById("page-note").value.trim() }
+    };
+    lastText = JSON.stringify(out, null, 2);
+    document.getElementById("json-out").textContent = lastText;
+    document.getElementById("copy").hidden = false;
+    const name = "APPROVED_" + KL.review.replace(/[^A-Za-z0-9_-]+/g, "-") + "_" + localDate(when) + ".json";
+    try {
+      const a = el("a", { href: URL.createObjectURL(new Blob([lastText], { type: "application/json" })), download: name });
+      document.body.append(a); a.click(); a.remove();
+      exported = true; dirty = false; store.clear();
+      status.textContent = "Exported " + name + " to your downloads folder. If no file appeared, use " +
+        "\"Copy the export as text\" and save it under that name.";
+    } catch (err) {
+      status.textContent = "Download blocked. Use \"Copy the export as text\" and save it as " + name + ".";
+    }
+  });
+  document.getElementById("clear").addEventListener("click", () => {
+    store.clear(); dirty = false;
+    document.getElementById("status").textContent =
+      "Saved draft cleared from this browser. Your choices stay on this page until you close it.";
+  });
+  document.getElementById("copy").addEventListener("click", async () => {
+    const status = document.getElementById("status");
+    try {
+      await navigator.clipboard.writeText(lastText);
+      exported = true; dirty = false; store.clear();
+      status.textContent = "Copied. Paste it into a plain-text file and save it with a .json name.";
+    } catch (e) {
+      const pre = document.getElementById("json-out");
+      pre.closest("details").open = true;
+      const r = document.createRange(); r.selectNodeContents(pre);
+      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      status.textContent = "Copying was blocked here: the text below is selected. Press Ctrl+C (Cmd+C on a Mac).";
+    }
+  });
+})();
+</script>
+</body>
+</html>

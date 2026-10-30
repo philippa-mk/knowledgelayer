@@ -1,0 +1,80 @@
+# Runs the full R package check on every change, on the platforms and R
+# versions the package supports. Read-only: it builds and tests, nothing else.
+name: R-CMD-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (R ${{ matrix.config.r }})
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: windows-latest, r: 'release'}
+          # Posit's package manager stopped building R 4.1 Windows binaries
+          # of some dependencies (igraph, via targets) in 2024, and the
+          # current igraph source does not compile there. This row takes its
+          # packages from the last dated snapshot that has them all; R
+          # itself is still genuine 4.1.3.
+          - {os: windows-latest, r: '4.1', rspm: 'https://packagemanager.posit.co/cran/2024-01-02'}
+          - {os: macos-latest,   r: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
+          - {os: ubuntu-latest,  r: '4.1'}
+    env:
+      R_KEEP_PKG_SOURCE: yes
+      RSPM: ${{ matrix.config.rspm }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-pandoc@v2
+      # CRAN moved the R 4.1 Windows installer and Rtools40 to its archive
+      # host, where setup-r does not look (it gets a 404). Install genuine
+      # R 4.1.3 and Rtools40 from there over HTTPS; setup-r then configures
+      # them (it skips Rtools when C:\rtools40 exists), and a later step
+      # fails unless the R that runs the check really is 4.1.3. CRAN
+      # publishes no checksum for these installers, so the version check is
+      # the guard.
+      - name: Install R 4.1.3 and Rtools40 on Windows from the CRAN archive
+        if: runner.os == 'Windows' && matrix.config.r == '4.1'
+        shell: pwsh
+        run: |
+          $url = "https://cran-archive.r-project.org/bin/windows/base/old/4.1.3/R-4.1.3-win.exe"
+          Invoke-WebRequest -Uri $url -OutFile "$env:RUNNER_TEMP\R-4.1.3-win.exe"
+          Start-Process -Wait -FilePath "$env:RUNNER_TEMP\R-4.1.3-win.exe" `
+            -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/DIR=C:\R\R-4.1.3"
+          "C:\R\R-4.1.3\bin\x64" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+          $rtools = "https://cran-archive.r-project.org/bin/windows/Rtools/rtools40-x86_64.exe"
+          Invoke-WebRequest -Uri $rtools -OutFile "$env:RUNNER_TEMP\rtools40-x86_64.exe"
+          Start-Process -Wait -FilePath "$env:RUNNER_TEMP\rtools40-x86_64.exe" `
+            -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/DIR=C:\rtools40"
+          if (-not (Test-Path "C:\rtools40\usr\bin")) { throw "Rtools40 did not install" }
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          install-r: ${{ !(runner.os == 'Windows' && matrix.config.r == '4.1') }}
+          use-public-rspm: true
+      - name: Confirm the R version under test
+        shell: Rscript {0}
+        run: |
+          v <- getRversion()
+          cat("R under test:", format(v), "\n")
+          want <- "${{ matrix.config.r }}"
+          if (want != "release" && !startsWith(format(v), paste0(want, "."))) {
+            stop("Expected R ", want, ".x but found ", format(v))
+          }
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          error-on: '"warning"'

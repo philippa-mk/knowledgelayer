@@ -1,0 +1,3 @@
+"id","finding","severity","proposed_fix","proposed_verdict","source","target"
+"F1","312 records appear twice","high","Deduplicate","TAKE","",""
+"F2","Chart label wrong","low","Fix label","TAKE","",""
